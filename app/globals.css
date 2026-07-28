@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design tokens.
+ *
+ * --accent est LA seule variable à modifier pour changer la couleur
+ * d'accent (or, bronze ou blanc casse) une fois validee par le client.
+ * Ne jamais coder cette couleur en dur ailleurs dans le projet : toujours
+ * utiliser les classes Tailwind `text-accent`, `bg-accent`,
+ * `border-accent`, etc.
+ */
+:root {
+  --background: #0b0b0c;
+  --surface: #16161a;
+  --surface-elevated: #1e1e24;
+  --border: #2a2a30;
+  --ink: #f5f3ef;
+  --muted: #aca79f;
+
+  /* Couleur d'accent provisoire (valeur de depart : or). */
+  --accent: #c9a24b;
+  /* Couleur du texte/icones affiches sur un fond --accent. */
+  --accent-contrast: #0b0b0c;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-ink font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif font-normal tracking-tight text-ink;
+  }
+
+  a {
+    @apply underline-offset-4;
+  }
+
+  /* Focus clavier visible et constant sur tout le site (accessibilite). */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent text-[color:var(--accent-contrast)] hover:opacity-90;
+  }
+
+  .btn-secondary {
+    @apply btn border border-border text-ink hover:border-accent hover:text-accent;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-accent;
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-[color:var(--accent-contrast)];
+  }
+}
