@@ -24,6 +24,9 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  const mapQuery = `${siteConfig.address.streetAddress}, ${siteConfig.address.postalCode} ${siteConfig.address.addressLocality}, ${siteConfig.address.addressCountry}`;
+  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=16&output=embed`;
+
   return (
     <>
       <StructuredData data={getDentistStructuredData()} />
@@ -106,14 +109,33 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-border bg-surface p-7 sm:p-8">
-            <h2 className="text-xl text-ink">Envoyer un message</h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted">
-              Pour toute urgence, privilégiez un appel téléphonique
-              directement au cabinet.
-            </p>
-            <div className="mt-6">
-              <ContactForm />
+          <div className="space-y-6">
+            <div className="rounded-2xl border border-border bg-surface p-7 sm:p-8">
+              <h2 className="text-xl text-ink">Plan d&apos;accès</h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                La carte démarre directement sur l&apos;adresse du cabinet pour
+                vous aider à vous repérer facilement.
+              </p>
+              <div className="mt-6 overflow-hidden rounded-2xl border border-border">
+                <iframe
+                  title="Carte Google Maps du cabinet"
+                  src={mapSrc}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="h-[320px] w-full sm:h-[400px]"
+                />
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-border bg-surface p-7 sm:p-8">
+              <h2 className="text-xl text-ink">Envoyer un message</h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                Pour toute urgence, privilégiez un appel téléphonique
+                directement au cabinet.
+              </p>
+              <div className="mt-6">
+                <ContactForm />
+              </div>
             </div>
           </div>
         </div>
