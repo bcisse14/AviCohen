@@ -22,10 +22,7 @@ export const siteConfig = {
   description:
     "Cabinet dentaire du Dr Avi Cohen à Paris 12e, spécialisé en implantologie, esthétique dentaire et dentisterie numérique (CFAO).",
   address: {
-    // TODO (client) : adresse postale exacte non communiquée. À
-    // compléter avant mise en ligne (obligatoire pour le référencement
-    // local et les données structurées).
-    streetAddress: "Adresse à confirmer",
+    streetAddress: "87 avenue du général Michel Bizot",
     postalCode: "75012",
     addressLocality: "Paris",
     addressRegion: "Île-de-France",
@@ -33,10 +30,9 @@ export const siteConfig = {
   },
   // TODO (client) : numéro de téléphone non communiqué.
   phone: "+33 1 00 00 00 00",
-  // TODO (client) : e-mail de contact non communiqué. Sert aussi de
-  // destinataire par défaut pour le formulaire si la variable
-  // d'environnement CONTACT_EMAIL_TO n'est pas définie.
-  email: "contact@dr-avi-cohen-dentiste.fr",
+  // Sert aussi de destinataire par défaut pour le formulaire si la
+  // variable d'environnement CONTACT_EMAIL_TO n'est pas définie.
+  email: "docteurcohena@gmail.com",
   // TODO (client) : horaires réels non communiqués.
   openingHours: [
     { days: "Lundi - Vendredi", hours: "9h00 - 19h00" },

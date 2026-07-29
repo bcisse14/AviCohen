@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description:
     "Esthétique dentaire au cabinet du Dr Avi Cohen à Paris 12e : éclaircissement, facettes et harmonisation du sourire, avec un rendu naturel.",
   openGraph: {
-    title: `Esthétique dentaire — ${siteConfig.practiceName}`,
+    title: `Esthétique dentaire - ${siteConfig.practiceName}`,
     description:
       "Éclaircissement, facettes et harmonisation du sourire, avec un rendu naturel.",
   },

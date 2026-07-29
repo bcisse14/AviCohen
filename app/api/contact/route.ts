@@ -100,7 +100,7 @@ export async function POST(request: Request) {
       from: `Site ${siteConfig.practiceName} <${from}>`,
       to,
       reply_to: email,
-      subject: `Nouveau message du site — ${nom}`,
+      subject: `Nouveau message du site - ${nom}`,
       html: `
         <p><strong>Nom :</strong> ${escapeHtml(nom)}</p>
         <p><strong>E-mail :</strong> ${escapeHtml(email)}</p>

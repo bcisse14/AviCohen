@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "La dentisterie numérique au cabinet du Dr Avi Cohen à Paris 12e : empreintes optiques, conception et fabrication assistées par ordinateur (CFAO).",
   openGraph: {
-    title: `Dentisterie numérique (CFAO) — ${siteConfig.practiceName}`,
+    title: `Dentisterie numérique (CFAO) - ${siteConfig.practiceName}`,
     description:
       "Empreintes optiques, conception et fabrication assistées par ordinateur pour des soins plus précis.",
     images: ["/images/numerique-salle-vue-ensemble.jpg"],

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Galerie photo du cabinet du Dr Avi Cohen à Paris 12e : découvrez l'ambiance et les espaces du cabinet.",
   openGraph: {
-    title: `Galerie photo — ${siteConfig.practiceName}`,
+    title: `Galerie photo - ${siteConfig.practiceName}`,
     description:
       "Découvrez l'ambiance et les espaces du cabinet du Dr Avi Cohen.",
     images: ["/images/deco-miroir-detail.jpg"],

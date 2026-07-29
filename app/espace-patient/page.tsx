@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description:
     "Espace patient du cabinet du Dr Avi Cohen : informations pratiques avant votre venue, prise en charge et réponses aux questions fréquentes.",
   openGraph: {
-    title: `Espace patient — ${siteConfig.practiceName}`,
+    title: `Espace patient - ${siteConfig.practiceName}`,
     description:
       "Informations pratiques avant votre venue, prise en charge et réponses aux questions fréquentes.",
   },

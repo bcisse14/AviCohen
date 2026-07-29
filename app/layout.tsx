@@ -23,15 +23,15 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.practiceName} — ${siteConfig.tagline}`,
-    template: `%s — ${siteConfig.name}`,
+    default: `${siteConfig.practiceName} - ${siteConfig.tagline}`,
+    template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
   openGraph: {
     type: "website",
     locale: siteConfig.locale,
     siteName: siteConfig.practiceName,
-    title: `${siteConfig.practiceName} — ${siteConfig.tagline}`,
+    title: `${siteConfig.practiceName} - ${siteConfig.tagline}`,
     description: siteConfig.description,
   },
   robots: {

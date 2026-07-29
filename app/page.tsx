@@ -10,11 +10,11 @@ import { specialties, siteConfig, team } from "@/lib/site-config";
 import { getDentistStructuredData } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
-  title: `${siteConfig.practiceName} — ${siteConfig.tagline}`,
+  title: `${siteConfig.practiceName} - ${siteConfig.tagline}`,
   description:
     "Cabinet dentaire à Paris 12e : implantologie, esthétique dentaire et dentisterie numérique (CFAO), dans un cadre soigné et accueillant.",
   openGraph: {
-    title: `${siteConfig.practiceName} — ${siteConfig.tagline}`,
+    title: `${siteConfig.practiceName} - ${siteConfig.tagline}`,
     description:
       "Cabinet dentaire à Paris 12e : implantologie, esthétique dentaire et dentisterie numérique (CFAO).",
     images: ["/images/cabinet-salle-soin-01.jpg"],
@@ -165,7 +165,7 @@ export default function AccueilPage() {
                 rel="noopener noreferrer"
                 className="btn-secondary whitespace-nowrap"
               >
-                Doctolib — {member.name}
+                Doctolib - {member.name}
               </Link>
             ))}
           </div>

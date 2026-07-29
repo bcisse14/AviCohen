@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "L'implantologie dentaire au cabinet du Dr Avi Cohen à Paris 12e : remplacement durable des dents manquantes, étapes du traitement et suivi personnalisé.",
   openGraph: {
-    title: `Implantologie dentaire — ${siteConfig.practiceName}`,
+    title: `Implantologie dentaire - ${siteConfig.practiceName}`,
     description:
       "Remplacement durable des dents manquantes par implants, avec un suivi personnalisé à chaque étape.",
   },

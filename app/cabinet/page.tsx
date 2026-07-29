@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Découvrez le cabinet du Dr Avi Cohen à Paris 12e : un espace de soin moderne, pensé pour l'accueil et le confort des patients.",
   openGraph: {
-    title: `Le cabinet — ${siteConfig.practiceName}`,
+    title: `Le cabinet - ${siteConfig.practiceName}`,
     description:
       "Découvrez le cabinet du Dr Avi Cohen à Paris 12e : un espace de soin moderne, pensé pour l'accueil et le confort des patients.",
     images: ["/images/accueil-secretariat-01.jpg"],

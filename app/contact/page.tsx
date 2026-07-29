@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description:
     "Contactez le cabinet du Dr Avi Cohen à Paris 12e : coordonnées, horaires, formulaire de contact et rendez-vous en ligne via Doctolib.",
   openGraph: {
-    title: `Contact — ${siteConfig.practiceName}`,
+    title: `Contact - ${siteConfig.practiceName}`,
     description:
       "Coordonnées, horaires, formulaire de contact et rendez-vous en ligne via Doctolib.",
   },
