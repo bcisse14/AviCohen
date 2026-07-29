@@ -62,32 +62,30 @@ export function Figure({
 
       {isOpen ? (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 px-4 py-6 backdrop-blur-sm"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 px-4 py-6"
           onClick={() => setIsOpen(false)}
         >
+          <button
+            type="button"
+            onClick={() => setIsOpen(false)}
+            aria-label="Fermer l'image"
+            className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center text-3xl leading-none text-white/90 transition hover:text-white"
+          >
+            ×
+          </button>
+
           <div
             className="relative flex max-h-[90vh] max-w-[95vw] items-center justify-center"
             onClick={(event) => event.stopPropagation()}
           >
-            <button
-              type="button"
-              onClick={() => setIsOpen(false)}
-              aria-label="Fermer l'image"
-              className="absolute right-2 top-2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-xl text-white transition hover:bg-black"
-            >
-              ×
-            </button>
-
-            <div className="overflow-hidden rounded-[1.5rem] border border-white/20 bg-surface/80 p-2 shadow-2xl">
-              <Image
-                src={src}
-                alt={alt}
-                width={1600}
-                height={1200}
-                priority
-                className="max-h-[84vh] max-w-[90vw] rounded-[1rem] object-contain"
-              />
-            </div>
+            <Image
+              src={src}
+              alt={alt}
+              width={1600}
+              height={1200}
+              priority
+              className="max-h-[90vh] max-w-[92vw] object-contain"
+            />
           </div>
         </div>
       ) : null}
