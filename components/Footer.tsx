@@ -73,10 +73,25 @@ export function Footer() {
       </div>
 
       <div className="border-t border-border py-6">
-        <p className="container-site text-xs text-muted">
-          © {new Date().getFullYear()} {siteConfig.practiceName}. Tous droits
-          réservés.
-        </p>
+        <div className="container-site flex flex-col gap-2 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {new Date().getFullYear()} {siteConfig.practiceName}. Tous droits
+            réservés.
+          </p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <Link href="/mentions-legales" className="no-underline hover:text-accent">
+              Mentions légales
+            </Link>
+            <a
+              href="https://bafode-cisse.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="no-underline hover:text-accent"
+            >
+              Site réalisé par Karlsefni
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   );
