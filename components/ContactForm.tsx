@@ -7,12 +7,14 @@ type Status = "idle" | "loading" | "success" | "error";
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const statusId = useId();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("loading");
     setErrorMessage("");
+    setSuccessMessage("");
 
     const form = event.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
@@ -36,6 +38,10 @@ export function ContactForm() {
       }
 
       setStatus("success");
+      setSuccessMessage(
+        result?.message ??
+          "Votre message a bien été envoyé. Le cabinet vous répondra dans les meilleurs délais."
+      );
       form.reset();
     } catch {
       setStatus("error");
@@ -128,8 +134,8 @@ export function ContactForm() {
       <p role="status" aria-live="polite" id={statusId} className="text-sm">
         {status === "success" ? (
           <span className="text-accent">
-            Votre message a bien été envoyé. Le cabinet vous répondra dans
-            les meilleurs délais.
+            {successMessage ||
+              "Votre message a bien été envoyé. Le cabinet vous répondra dans les meilleurs délais."}
           </span>
         ) : null}
         {status === "error" ? (

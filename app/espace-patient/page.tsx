@@ -20,10 +20,10 @@ export const metadata: Metadata = {
 };
 
 const documents = [
-  "Une pièce d'identité",
-  "Votre carte Vitale et votre carte de mutuelle",
-  "Vos éventuels examens ou radiographies récents",
-  "La liste de vos traitements médicaux en cours",
+  "Votre carte Vitale (acceptée au cabinet)",
+  "Un moyen de paiement : carte bancaire, chèque ou espèces",
+  "Vos examens/radiographies dentaires récents, si vous en avez",
+  "Tout document utile à votre suivi de soins",
 ];
 
 const faq = [
@@ -40,7 +40,7 @@ const faq = [
   {
     question: "Les soins sont-ils pris en charge par la mutuelle ?",
     answer:
-      "Le niveau de prise en charge dépend de votre contrat de mutuelle et du type de soin. Un devis détaillé vous est systématiquement remis avant tout traitement engageant des frais importants.",
+      "Le cabinet est conventionné, accepte la carte Vitale et pratique le tiers payant Sécurité sociale. Le remboursement complémentaire dépend de votre contrat de mutuelle et du type de soin.",
   },
   {
     question: "Puis-je venir accompagné à mon rendez-vous ?",
@@ -84,11 +84,11 @@ export default function EspacePatientPage() {
               Prise en charge et mutuelle
             </h2>
             <p className="mt-6 leading-relaxed text-muted">
-              Un devis clair et détaillé vous est proposé avant tout soin
-              impliquant des frais significatifs, avec une estimation de
-              la part prise en charge par l&apos;Assurance Maladie et
-              votre mutuelle. N&apos;hésitez pas à apporter les
-              coordonnées de votre contrat pour affiner cette estimation.
+              D&apos;après les informations Doctolib, le cabinet est
+              conventionné, la carte Vitale est acceptée et le tiers
+              payant Sécurité sociale est proposé. Le niveau de
+              remboursement complémentaire dépend ensuite de votre contrat
+              de mutuelle.
             </p>
           </div>
         </div>

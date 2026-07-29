@@ -24,6 +24,25 @@ function escapeHtml(value: string) {
     .replace(/'/g, "&#39;");
 }
 
+function isResendSandboxError(error: unknown) {
+  if (!error || typeof error !== "object") {
+    return false;
+  }
+
+  const candidate = error as {
+    statusCode?: number;
+    name?: string;
+    message?: string;
+  };
+
+  const message = candidate.message?.toLowerCase() ?? "";
+
+  return (
+    (candidate.statusCode === 403 || candidate.name === "validation_error") &&
+    message.includes("only send testing emails")
+  );
+}
+
 export async function POST(request: Request) {
   let body: Record<string, unknown>;
 
@@ -111,6 +130,18 @@ export async function POST(request: Request) {
     });
 
     if (error) {
+      if (isResendSandboxError(error)) {
+        console.warn(
+          "Resend est en mode sandbox : le message a été reçu mais l'e-mail n'a pas pu être envoyé."
+        );
+        return NextResponse.json({
+          ok: true,
+          skipped: true,
+          message:
+            "Votre message a bien été reçu. L'envoi d'e-mail est actuellement limité à l'environnement de test, merci de nous contacter directement si nécessaire.",
+        });
+      }
+
       console.error("Erreur Resend :", error);
       return NextResponse.json(
         { message: "L'envoi du message a échoué. Merci de réessayer." },
@@ -120,6 +151,18 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ ok: true });
   } catch (error) {
+    if (isResendSandboxError(error)) {
+      console.warn(
+        "Resend est en mode sandbox : le message a été reçu mais l'e-mail n'a pas pu être envoyé."
+      );
+      return NextResponse.json({
+        ok: true,
+        skipped: true,
+        message:
+          "Votre message a bien été reçu. L'envoi d'e-mail est actuellement limité à l'environnement de test, merci de nous contacter directement si nécessaire.",
+      });
+    }
+
     console.error("Erreur lors de l'envoi du message de contact :", error);
     return NextResponse.json(
       { message: "L'envoi du message a échoué. Merci de réessayer." },
