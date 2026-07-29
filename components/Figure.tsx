@@ -17,6 +17,7 @@ export function Figure({
   sizes?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const imageHref = typeof src === "string" ? src : src.src;
 
   useEffect(() => {
     if (!isOpen) {
@@ -75,21 +76,12 @@ export function Figure({
           </button>
 
           <div className="relative flex max-h-[90vh] max-w-[95vw] items-center justify-center">
-            <button
-              type="button"
+            <img
+              src={imageHref}
+              alt={alt}
               onClick={(event) => event.stopPropagation()}
-              aria-label="Image agrandie"
-              className="block cursor-default"
-            >
-              <Image
-                src={src}
-                alt={alt}
-                width={1600}
-                height={1200}
-                priority
-                className="max-h-[90vh] max-w-[92vw] object-contain"
-              />
-            </button>
+              className="block max-h-[90vh] max-w-[92vw] object-contain"
+            />
           </div>
         </div>
       ) : null}
