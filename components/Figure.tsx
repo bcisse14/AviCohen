@@ -74,18 +74,22 @@ export function Figure({
             ×
           </button>
 
-          <div
-            className="relative flex max-h-[90vh] max-w-[95vw] items-center justify-center"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <Image
-              src={src}
-              alt={alt}
-              width={1600}
-              height={1200}
-              priority
-              className="max-h-[90vh] max-w-[92vw] object-contain"
-            />
+          <div className="relative flex max-h-[90vh] max-w-[95vw] items-center justify-center">
+            <button
+              type="button"
+              onClick={(event) => event.stopPropagation()}
+              aria-label="Image agrandie"
+              className="block cursor-default"
+            >
+              <Image
+                src={src}
+                alt={alt}
+                width={1600}
+                height={1200}
+                priority
+                className="max-h-[90vh] max-w-[92vw] object-contain"
+              />
+            </button>
           </div>
         </div>
       ) : null}
