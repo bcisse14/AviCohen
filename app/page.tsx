@@ -81,15 +81,21 @@ export default function AccueilPage() {
                 key={member.slug}
                 className="flex flex-col gap-5 rounded-2xl border border-border bg-background p-7 sm:flex-row sm:items-start"
               >
-                <span className="relative h-28 w-28 shrink-0 overflow-hidden rounded-full border border-border bg-surface">
+                <a
+                  href={member.photo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${member.photoAlt} - ouvrir l'image en grand`}
+                  className="group relative h-28 w-28 shrink-0 overflow-hidden rounded-full border border-border bg-surface"
+                >
                   <Image
                     src={member.photo}
                     alt={member.photoAlt}
                     fill
                     sizes="112px"
-                    className="object-cover"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
-                </span>
+                </a>
                 <div>
                   <p className="text-lg text-ink">{member.name}</p>
                   <p className="mt-1 text-sm font-medium text-accent">

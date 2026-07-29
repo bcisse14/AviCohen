@@ -13,18 +13,28 @@ export function Figure({
   priority?: boolean;
   sizes?: string;
 }) {
+  const imageHref = typeof src === "string" ? src : src.src;
+
   return (
-    <div
-      className={`relative overflow-hidden rounded-2xl border border-border bg-surface ${className}`}
+    <a
+      href={imageHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${alt} - ouvrir l'image en grand`}
+      className="group block no-underline"
     >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        priority={priority}
-        sizes={sizes}
-        className="object-cover"
-      />
-    </div>
+      <div
+        className={`relative overflow-hidden rounded-2xl border border-border bg-surface ${className}`}
+      >
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          priority={priority}
+          sizes={sizes}
+          className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+        />
+      </div>
+    </a>
   );
 }
