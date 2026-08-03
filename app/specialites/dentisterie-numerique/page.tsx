@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { PageHero } from "@/components/PageHero";
 import { Figure } from "@/components/Figure";
+import { ImagePlaceholder } from "@/components/ImagePlaceholder";
 import { CTALink, Eyebrow } from "@/components/ui";
 import { IconCalendar } from "@/components/icons";
 import { specialties, siteConfig } from "@/lib/site-config";
@@ -18,6 +21,10 @@ export const metadata: Metadata = {
 };
 
 const numerique = specialties.find((s) => s.slug === "dentisterie-numerique");
+const detailPrinterImageSrc = "/images/cfao-imprimante-3d-detail.jpg";
+const hasDetailPrinterImage = existsSync(
+  join(process.cwd(), "public", "images", "cfao-imprimante-3d-detail.jpg"),
+);
 
 export default function DentisterieNumeriquePage() {
   const images = numerique?.images ?? [];
@@ -59,8 +66,8 @@ export default function DentisterieNumeriquePage() {
         <div className="container-site grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:items-center">
           <div className="lg:order-2">
             <Figure
-              src="/images/numerique-scanner-intraoral.jpg"
-              alt="Scanner intra oral utilisé pour la conception assistée par ordinateur"
+              src="/images/numerique-opera-system.jpg"
+              alt="Écran de conception numérique affichant une reconstruction 3D du sourire"
               className="aspect-[4/3]"
             />
           </div>
@@ -92,13 +99,27 @@ export default function DentisterieNumeriquePage() {
               les délais et le nombre de rendez-vous nécessaires.
             </p>
           </div>
-          {images[3] ? (
-            <Figure
-              src={images[3].src}
-              alt={images[3].alt}
-              className="aspect-[4/3]"
-            />
-          ) : null}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {images[3] ? (
+              <Figure
+                src={images[3].src}
+                alt={images[3].alt}
+                className="aspect-[4/3]"
+              />
+            ) : null}
+            {hasDetailPrinterImage ? (
+              <Figure
+                src={detailPrinterImageSrc}
+                alt="Détail d'une imprimante 3D utilisée pour la fabrication assistée par ordinateur"
+                className="aspect-[4/3]"
+              />
+            ) : (
+              <ImagePlaceholder
+                label="Détail imprimante 3D à venir"
+                className="aspect-[4/3]"
+              />
+            )}
+          </div>
         </div>
       </section>
 

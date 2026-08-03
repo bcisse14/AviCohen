@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { CTALink, Eyebrow } from "@/components/ui";
-import { Figure } from "@/components/Figure";
 import {
   IconCalendar,
   IconShield,
@@ -67,12 +66,28 @@ export default function EsthetiqueDentairePage() {
               clinique complet.
             </p>
           </div>
-          <Figure
-            src="/images/soins-esthetiques-dentaires.webp"
-            alt="Soins d'esthétique dentaire"
-            className="aspect-[4/3]"
-            priority
-          />
+          <div className="rounded-2xl border border-border bg-surface p-8 sm:p-10">
+            <div className="rounded-2xl border border-border/70 bg-background p-8 text-center">
+              <IconSparkleSmile className="mx-auto h-20 w-20 text-accent sm:h-24 sm:w-24" />
+              <p className="mt-5 text-sm uppercase tracking-[0.18em] text-muted">
+                Illustration des soins esthétiques
+              </p>
+              <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                <div className="rounded-xl border border-border bg-surface p-4">
+                  <IconSparkleSmile className="mx-auto h-8 w-8 text-accent" />
+                  <p className="mt-3 text-xs text-muted">Éclaircissement</p>
+                </div>
+                <div className="rounded-xl border border-border bg-surface p-4">
+                  <IconTooth className="mx-auto h-8 w-8 text-accent" />
+                  <p className="mt-3 text-xs text-muted">Facettes</p>
+                </div>
+                <div className="rounded-xl border border-border bg-surface p-4">
+                  <IconShield className="mx-auto h-8 w-8 text-accent" />
+                  <p className="mt-3 text-xs text-muted">Harmonisation</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
