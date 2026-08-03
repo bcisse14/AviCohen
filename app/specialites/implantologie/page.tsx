@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { CTALink, Eyebrow } from "@/components/ui";
-import { ImagePlaceholder } from "@/components/ImagePlaceholder";
+import { Figure } from "@/components/Figure";
 import { IconCalendar, IconImplant, IconShield, IconTooth } from "@/components/icons";
 import { siteConfig } from "@/lib/site-config";
 
@@ -50,7 +50,12 @@ export default function ImplantologiePage() {
 
       <section className="border-b border-border">
         <div className="container-site grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:items-center">
-          <ImagePlaceholder className="aspect-[4/3]" />
+          <Figure
+            src="/images/structure-implant-dentaire.webp"
+            alt="Structure d'un implant dentaire"
+            className="aspect-[4/3]"
+            priority
+          />
           <div>
             <IconImplant className="h-12 w-12 text-accent" />
             <h2 className="mt-5 text-2xl sm:text-3xl">

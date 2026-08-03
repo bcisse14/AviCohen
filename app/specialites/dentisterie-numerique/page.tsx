@@ -57,15 +57,13 @@ export default function DentisterieNumeriquePage() {
 
       <section className="border-b border-border bg-surface">
         <div className="container-site grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:items-center">
-          {images[2] ? (
-            <div className="lg:order-2">
-              <Figure
-                src={images[2].src}
-                alt={images[2].alt}
-                className="aspect-[4/3]"
-              />
-            </div>
-          ) : null}
+          <div className="lg:order-2">
+            <Figure
+              src="/images/numerique-scanner-intraoral.jpg"
+              alt="Scanner intra oral utilisé pour la conception assistée par ordinateur"
+              className="aspect-[4/3]"
+            />
+          </div>
           <div className="lg:order-1">
             <Eyebrow>Conception assistée par ordinateur</Eyebrow>
             <h2 className="mt-4 text-3xl sm:text-4xl">

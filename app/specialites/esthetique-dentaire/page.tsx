@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { CTALink, Eyebrow } from "@/components/ui";
-import { ImagePlaceholder } from "@/components/ImagePlaceholder";
+import { Figure } from "@/components/Figure";
 import {
   IconCalendar,
   IconShield,
@@ -67,7 +67,12 @@ export default function EsthetiqueDentairePage() {
               clinique complet.
             </p>
           </div>
-          <ImagePlaceholder className="aspect-[4/3]" />
+          <Figure
+            src="/images/soins-esthetiques-dentaires.webp"
+            alt="Soins d'esthétique dentaire"
+            className="aspect-[4/3]"
+            priority
+          />
         </div>
       </section>
 
