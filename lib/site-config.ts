@@ -111,10 +111,17 @@ export const specialties: Specialty[] = [
     summary:
       "Remplacement durable des dents manquantes grâce à des implants intégrés chirurgicalement dans l'os maxillaire.",
     href: "/specialites/implantologie",
-    // TODO (client) : aucune photo disponible pour cette spécialité à ce
-    // jour. Dès réception de photos, passer hasPhotos à true et
-    // renseigner le tableau images.
-    hasPhotos: false,
+    hasPhotos: true,
+    images: [
+      {
+        src: "/images/implantologie_1.webp",
+        alt: "Avant et après réhabilitation implantaire du sourire",
+      },
+      {
+        src: "/images/implantologie_2.webp",
+        alt: "Résultat de traitement implantaire avec intégration esthétique",
+      },
+    ],
   },
   {
     slug: "esthetique-dentaire",

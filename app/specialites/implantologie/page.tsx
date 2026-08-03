@@ -39,6 +39,28 @@ const etapes = [
   },
 ];
 
+const resultatsImplantologie = [
+  {
+    src: "/images/implantologie_1.webp",
+    alt: "Avant et après réhabilitation implantaire du sourire",
+    title: "Cas clinique 1",
+    description:
+      "Restauration de la fonction et de l'esthétique avec un résultat stable et naturel.",
+  },
+  {
+    src: "/images/implantologie_2.webp",
+    alt: "Résultat de traitement implantaire avec intégration esthétique",
+    title: "Cas clinique 2",
+    description:
+      "Rééquilibrage du sourire et amélioration de l'alignement prothétique après traitement.",
+  },
+];
+
+const visuelPrincipalImplantologie = {
+  src: "/images/implantologie_1.webp",
+  alt: "Avant et après réhabilitation implantaire du sourire",
+};
+
 export default function ImplantologiePage() {
   return (
     <>
@@ -51,8 +73,8 @@ export default function ImplantologiePage() {
       <section className="border-b border-border">
         <div className="container-site grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:items-center">
           <Figure
-            src="/images/structure-implant-dentaire.webp"
-            alt="Structure d'un implant dentaire"
+            src={visuelPrincipalImplantologie.src}
+            alt={visuelPrincipalImplantologie.alt}
             className="aspect-[4/3]"
             priority
           />
@@ -92,6 +114,40 @@ export default function ImplantologiePage() {
                   {etape.description}
                 </p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border">
+        <div className="container-site py-16 sm:py-20">
+          <Eyebrow>Résultats cliniques</Eyebrow>
+          <h2 className="mt-4 max-w-3xl text-3xl sm:text-4xl">
+            Exemples de restaurations en implantologie
+          </h2>
+          <p className="mt-5 max-w-3xl leading-relaxed text-muted">
+            Ces cas illustrent des situations traitées au cabinet, avec une
+            attention portée à la stabilité du résultat et à l&apos;intégration
+            esthétique dans le sourire.
+          </p>
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            {resultatsImplantologie.map((cas) => (
+              <article
+                key={cas.src}
+                className="rounded-2xl border border-border bg-surface p-4 sm:p-5"
+              >
+                <Figure
+                  src={cas.src}
+                  alt={cas.alt}
+                  className="aspect-[4/3]"
+                  sizes="(min-width: 1024px) 42vw, 100vw"
+                />
+                <h3 className="mt-4 text-xl text-ink">{cas.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">
+                  {cas.description}
+                </p>
+              </article>
             ))}
           </div>
         </div>

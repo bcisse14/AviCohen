@@ -45,6 +45,8 @@ const montagesAvantApres = [
   },
 ];
 
+const montagePrincipal = montagesAvantApres[0];
+
 export const metadata: Metadata = {
   title: "Esthétique dentaire",
   description:
@@ -102,12 +104,14 @@ export default function EsthetiqueDentairePage() {
               clinique complet.
             </p>
           </div>
-          <Figure
-            src={montagesAvantApres[0].src}
-            alt={montagesAvantApres[0].alt}
-            className="aspect-[4/3]"
-            priority
-          />
+          {montagePrincipal ? (
+            <Figure
+              src={montagePrincipal.src}
+              alt={montagePrincipal.alt}
+              className="aspect-[4/3]"
+              priority
+            />
+          ) : null}
         </div>
       </section>
 
