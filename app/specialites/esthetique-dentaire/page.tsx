@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
+import { Figure } from "@/components/Figure";
 import { CTALink, Eyebrow } from "@/components/ui";
 import {
   IconCalendar,
@@ -8,6 +9,41 @@ import {
   IconTooth,
 } from "@/components/icons";
 import { siteConfig } from "@/lib/site-config";
+
+const casAvantApres = [
+  {
+    key: "1",
+    avantSrc: "/images/avant_1.jpg",
+    avantAlt: "Sourire avant traitement esthétique, cas 1",
+    apresSrc: "/images/apres_1.jpg",
+    apresAlt: "Sourire après traitement esthétique, cas 1",
+  },
+  {
+    key: "2",
+    avantSrc: "/images/avant_2.jpg",
+    avantAlt: "Sourire avant traitement esthétique, cas 2",
+    apresSrc: "/images/apres_2.jpg",
+    apresAlt: "Sourire après traitement esthétique, cas 2",
+  },
+  {
+    key: "3",
+    avantSrc: "/images/avant_3.png",
+    avantAlt: "Restauration dentaire avant traitement, cas 3",
+    apresSrc: "/images/apres_3.png",
+    apresAlt: "Restauration dentaire après traitement, cas 3",
+  },
+];
+
+const montagesAvantApres = [
+  {
+    src: "/images/avant-apres_1.jpg",
+    alt: "Montage photo montrant un avant et un après traitement esthétique",
+  },
+  {
+    src: "/images/avant-apres_2.jpg",
+    alt: "Montage photo comparatif avant et après restauration esthétique",
+  },
+];
 
 export const metadata: Metadata = {
   title: "Esthétique dentaire",
@@ -66,28 +102,12 @@ export default function EsthetiqueDentairePage() {
               clinique complet.
             </p>
           </div>
-          <div className="rounded-2xl border border-border bg-surface p-8 sm:p-10">
-            <div className="rounded-2xl border border-border/70 bg-background p-8 text-center">
-              <IconSparkleSmile className="mx-auto h-20 w-20 text-accent sm:h-24 sm:w-24" />
-              <p className="mt-5 text-sm uppercase tracking-[0.18em] text-muted">
-                Illustration des soins esthétiques
-              </p>
-              <div className="mt-8 grid gap-4 sm:grid-cols-3">
-                <div className="rounded-xl border border-border bg-surface p-4">
-                  <IconSparkleSmile className="mx-auto h-8 w-8 text-accent" />
-                  <p className="mt-3 text-xs text-muted">Éclaircissement</p>
-                </div>
-                <div className="rounded-xl border border-border bg-surface p-4">
-                  <IconTooth className="mx-auto h-8 w-8 text-accent" />
-                  <p className="mt-3 text-xs text-muted">Facettes</p>
-                </div>
-                <div className="rounded-xl border border-border bg-surface p-4">
-                  <IconShield className="mx-auto h-8 w-8 text-accent" />
-                  <p className="mt-3 text-xs text-muted">Harmonisation</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Figure
+            src={montagesAvantApres[0].src}
+            alt={montagesAvantApres[0].alt}
+            className="aspect-[4/3]"
+            priority
+          />
         </div>
       </section>
 
@@ -105,6 +125,66 @@ export default function EsthetiqueDentairePage() {
                   {item.description}
                 </p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border">
+        <div className="container-site py-16 sm:py-20">
+          <Eyebrow>Avant / après</Eyebrow>
+          <h2 className="mt-4 max-w-3xl text-3xl sm:text-4xl">
+            Exemples de résultats en esthétique dentaire
+          </h2>
+          <p className="mt-5 max-w-3xl leading-relaxed text-muted">
+            Une sélection de cas traités au cabinet pour illustrer les
+            possibilités d&apos;harmonisation du sourire selon la situation
+            clinique de chaque patient.
+          </p>
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+            {casAvantApres.map((cas) => (
+              <article
+                key={cas.key}
+                className="rounded-2xl border border-border bg-surface p-4 sm:p-5"
+              >
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div>
+                    <p className="mb-2 text-xs uppercase tracking-[0.16em] text-muted">
+                      Avant
+                    </p>
+                    <Figure
+                      src={cas.avantSrc}
+                      alt={cas.avantAlt}
+                      className="aspect-[4/3]"
+                      sizes="(min-width: 1024px) 16vw, (min-width: 640px) 40vw, 100vw"
+                    />
+                  </div>
+                  <div>
+                    <p className="mb-2 text-xs uppercase tracking-[0.16em] text-muted">
+                      Après
+                    </p>
+                    <Figure
+                      src={cas.apresSrc}
+                      alt={cas.apresAlt}
+                      className="aspect-[4/3]"
+                      sizes="(min-width: 1024px) 16vw, (min-width: 640px) 40vw, 100vw"
+                    />
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            {montagesAvantApres.map((image) => (
+              <Figure
+                key={image.src}
+                src={image.src}
+                alt={image.alt}
+                className="aspect-[16/10]"
+                sizes="(min-width: 1024px) 42vw, 100vw"
+              />
             ))}
           </div>
         </div>

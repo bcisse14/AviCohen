@@ -123,10 +123,41 @@ export const specialties: Specialty[] = [
     summary:
       "Des soins pensés pour harmoniser la forme, la teinte et l'alignement du sourire, avec un rendu naturel.",
     href: "/specialites/esthetique-dentaire",
-    // TODO (client) : aucune photo disponible pour cette spécialité à ce
-    // jour. Dès réception de photos, passer hasPhotos à true et
-    // renseigner le tableau images.
-    hasPhotos: false,
+    hasPhotos: true,
+    images: [
+      {
+        src: "/images/avant_1.jpg",
+        alt: "Sourire avant traitement esthétique, cas 1",
+      },
+      {
+        src: "/images/apres_1.jpg",
+        alt: "Sourire après traitement esthétique, cas 1",
+      },
+      {
+        src: "/images/avant_2.jpg",
+        alt: "Sourire avant traitement esthétique, cas 2",
+      },
+      {
+        src: "/images/apres_2.jpg",
+        alt: "Sourire après traitement esthétique, cas 2",
+      },
+      {
+        src: "/images/avant_3.png",
+        alt: "Restauration dentaire avant traitement, cas 3",
+      },
+      {
+        src: "/images/apres_3.png",
+        alt: "Restauration dentaire après traitement, cas 3",
+      },
+      {
+        src: "/images/avant-apres_1.jpg",
+        alt: "Montage photo montrant un avant et un après traitement esthétique",
+      },
+      {
+        src: "/images/avant-apres_2.jpg",
+        alt: "Montage photo comparatif avant et après restauration esthétique",
+      },
+    ],
   },
   {
     slug: "dentisterie-numerique",
