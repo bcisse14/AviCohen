@@ -5,7 +5,13 @@ import { Figure } from "@/components/Figure";
 import { Eyebrow, CTALink } from "@/components/ui";
 import { SpecialtyGrid } from "@/components/SpecialtyGrid";
 import { StructuredData } from "@/components/StructuredData";
-import { IconCalendar, IconShield, IconSparkleSmile } from "@/components/icons";
+import {
+  IconCalendar,
+  IconPhone,
+  IconPin,
+  IconShield,
+  IconSparkleSmile,
+} from "@/components/icons";
 import { specialties, siteConfig, team } from "@/lib/site-config";
 import { getDentistStructuredData } from "@/lib/structured-data";
 
@@ -54,6 +60,75 @@ export default function AccueilPage() {
             className="aspect-[4/3] lg:aspect-[5/4]"
             priority
           />
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-surface">
+        <div className="container-site grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:items-center">
+          <div>
+            <Eyebrow>Le cabinet</Eyebrow>
+            <h2 className="mt-4 max-w-xl text-3xl sm:text-4xl">
+              Un cabinet proche de la Porte Dorée
+            </h2>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+              Le cabinet du Dr Avi Cohen est situé à Paris, à proximité de la
+              Porte Dorée, dans un cadre facilement accessible. Il est animé
+              par deux praticiens, pour un accompagnement personnalisé à
+              chaque étape de votre suivi dentaire.
+            </p>
+          </div>
+
+          <Figure
+            src="/images/porte-doree-quartier.webp"
+            alt="La Porte Dorée, à proximité du cabinet"
+            className="aspect-[4/3] lg:aspect-[5/4]"
+          />
+        </div>
+      </section>
+
+      <section className="border-b border-border">
+        <div className="container-site py-16 sm:py-20">
+          <Eyebrow>Infos pratiques</Eyebrow>
+          <h2 className="mt-4 max-w-xl text-3xl sm:text-4xl">
+            Coordonnées et prise de rendez-vous
+          </h2>
+          <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+            <div className="rounded-2xl border border-border bg-surface p-7">
+              <ul className="flex flex-col gap-5 text-sm text-muted sm:text-base">
+                <li className="flex items-start gap-3">
+                  <IconPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                  <span>
+                    {siteConfig.address.streetAddress}
+                    <br />
+                    {siteConfig.address.postalCode} {siteConfig.address.addressLocality}
+                  </span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <IconPhone className="h-5 w-5 shrink-0 text-accent" />
+                  <a
+                    href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+                    className="no-underline hover:text-accent"
+                  >
+                    {siteConfig.phone}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href={siteConfig.doctolibUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
+                Prendre rendez-vous
+              </Link>
+              <CTALink href="/contact" variant="secondary">
+                Nous contacter
+              </CTALink>
+            </div>
+          </div>
         </div>
       </section>
 
