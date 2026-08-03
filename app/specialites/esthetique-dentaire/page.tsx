@@ -46,7 +46,10 @@ const montagesAvantApres = [
   },
 ];
 
-const montagePrincipal = montagesAvantApres[0];
+const montagePrincipal = {
+  src: "/images/soins-esthetiques-dentaires.webp",
+  alt: "Soins esthétiques dentaires au cabinet",
+};
 
 export const metadata: Metadata = {
   title: "Esthétique dentaire",

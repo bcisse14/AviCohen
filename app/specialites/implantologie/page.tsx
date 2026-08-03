@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { CTALink, Eyebrow } from "@/components/ui";
 import { Figure } from "@/components/Figure";
-import { MoreDetails } from "@/components/MoreDetails";
 import { IconCalendar, IconImplant, IconShield, IconTooth } from "@/components/icons";
 import { siteConfig } from "@/lib/site-config";
 
@@ -19,24 +18,29 @@ export const metadata: Metadata = {
 
 const etapes = [
   {
-    title: "Bilan et plan de traitement",
+    title: "Première phase : la pose de l'implant",
     description:
-      "Un examen clinique complet, appuyé si besoin par une imagerie 3D, permet d'évaluer la quantité et la qualité osseuse avant de définir le plan de traitement le mieux adapté.",
+      "L'intervention se déroule sous anesthésie locale. Le praticien ouvre la gencive au niveau de la zone édentée, prépare un petit logement dans l'os, puis met en place l'implant. La gencive est ensuite refermée.",
   },
   {
-    title: "Pose de l'implant",
+    title: "Une dizaine de jours plus tard",
     description:
-      "L'implant, une petite vis en titane biocompatible, est positionné dans l'os maxillaire sous anesthésie locale, dans des conditions d'asepsie strictes.",
+      "Les fils de suture sont retirés. Une couronne provisoire peut être posée à ce stade si nécessaire.",
   },
   {
-    title: "Cicatrisation osseuse",
+    title: "La période de cicatrisation",
     description:
-      "L'os se consolide progressivement autour de l'implant au cours des semaines suivantes, un phénomène appelé ostéo intégration.",
+      "Pendant trois à six mois, l'os se consolide progressivement autour de l'implant, un phénomène appelé ostéointégration. C'est un processus comparable à la consolidation d'une fracture osseuse.",
   },
   {
-    title: "Pose de la couronne",
+    title: "Deuxième phase : la mise en charge",
     description:
-      "Une fois l'implant stable, une couronne sur mesure est fixée dessus pour retrouver une dent fonctionnelle et esthétique.",
+      "Une petite ouverture de la gencive permet de découvrir l'implant. Une vis de cicatrisation est mise en place, puis remplacée une semaine plus tard par un pilier implantaire, qui fait l'intermédiaire entre l'implant et la future couronne. Une empreinte est alors prise avant la pose de la couronne définitive.",
+  },
+  {
+    title: "Le suivi au quotidien",
+    description:
+      "Tout porteur d'implant doit maintenir une hygiène bucco dentaire rigoureuse, matin et soir, et effectuer un contrôle clinique et radiologique une fois par an.",
   },
 ];
 
@@ -61,39 +65,6 @@ const visuelPrincipalImplantologie = {
   src: "/images/implantologie_1.webp",
   alt: "Avant et après réhabilitation implantaire du sourire",
 };
-
-const detailsImplantologie = [
-  {
-    title: "Première phase : la pose de l'implant",
-    paragraphs: [
-      "L'intervention se déroule sous anesthésie locale. Le praticien ouvre la gencive au niveau de la zone édentée, prépare un petit logement dans l'os, puis met en place l'implant. La gencive est ensuite refermée.",
-    ],
-  },
-  {
-    title: "Une dizaine de jours plus tard",
-    paragraphs: [
-      "Les fils de suture sont retirés. Une couronne provisoire peut être posée à ce stade si nécessaire.",
-    ],
-  },
-  {
-    title: "La période de cicatrisation",
-    paragraphs: [
-      "Pendant trois à six mois, l'os se consolide progressivement autour de l'implant, un phénomène appelé ostéointégration. C'est un processus comparable à la consolidation d'une fracture osseuse.",
-    ],
-  },
-  {
-    title: "Deuxième phase : la mise en charge",
-    paragraphs: [
-      "Une petite ouverture de la gencive permet de découvrir l'implant. Une vis de cicatrisation est mise en place, puis remplacée une semaine plus tard par un pilier implantaire, qui fait l'intermédiaire entre l'implant et la future couronne. Une empreinte est alors prise avant la pose de la couronne définitive.",
-    ],
-  },
-  {
-    title: "Le suivi au quotidien",
-    paragraphs: [
-      "Tout porteur d'implant doit maintenir une hygiène bucco dentaire rigoureuse, matin et soir, et effectuer un contrôle clinique et radiologique une fois par an.",
-    ],
-  },
-];
 
 export default function ImplantologiePage() {
   return (
@@ -126,10 +97,6 @@ export default function ImplantologiePage() {
               tailler les dents voisines, contrairement à un bridge
               classique.
             </p>
-            <MoreDetails
-              heading="Le déroulement complet, étape par étape"
-              items={detailsImplantologie}
-            />
           </div>
         </div>
       </section>
