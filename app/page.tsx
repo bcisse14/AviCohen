@@ -28,6 +28,9 @@ export const metadata: Metadata = {
 };
 
 export default function AccueilPage() {
+  const mapQuery = `${siteConfig.address.streetAddress}, ${siteConfig.address.postalCode} ${siteConfig.address.addressLocality}, ${siteConfig.address.addressCountry}`;
+  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&z=16&output=embed`;
+
   return (
     <>
       <StructuredData data={getDentistStructuredData()} />
@@ -130,6 +133,23 @@ export default function AccueilPage() {
               <CTALink href="/contact" variant="secondary">
                 Nous contacter
               </CTALink>
+            </div>
+          </div>
+
+          <div className="mt-8 rounded-2xl border border-border bg-surface p-6 sm:p-8">
+            <h3 className="text-xl text-ink">Plan d&apos;accès</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted">
+              La carte est centrée sur l&apos;adresse du cabinet pour vous
+              aider à préparer votre venue.
+            </p>
+            <div className="mt-6 overflow-hidden rounded-2xl border border-border">
+              <iframe
+                title="Carte Google Maps du cabinet"
+                src={mapSrc}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-[320px] w-full sm:h-[400px]"
+              />
             </div>
           </div>
         </div>
