@@ -7,11 +7,11 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Le cabinet",
   description:
-    "Découvrez le cabinet du Dr Avi Cohen à Paris 12e : un espace de soin moderne, pensé pour l'accueil et le confort des patients.",
+    "Découvrez le cabinet des Docteurs Cohen à Paris 12e : un espace de soin moderne, pensé pour l'accueil et le confort des patients.",
   openGraph: {
     title: `Le cabinet - ${siteConfig.practiceName}`,
     description:
-      "Découvrez le cabinet du Dr Avi Cohen à Paris 12e : un espace de soin moderne, pensé pour l'accueil et le confort des patients.",
+      "Découvrez le cabinet des Docteurs Cohen à Paris 12e : un espace de soin moderne, pensé pour l'accueil et le confort des patients.",
     images: ["/images/accueil-secretariat-01.jpg"],
   },
 };
@@ -29,7 +29,7 @@ export default function CabinetPage() {
         <div className="container-site grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:items-center">
           <Figure
             src="/images/accueil-secretariat-01.jpg"
-            alt="Accueil et secrétariat du cabinet du Dr Avi Cohen"
+            alt="Accueil et secrétariat du cabinet des Docteurs Cohen"
             className="aspect-[4/3]"
           />
           <div>
@@ -76,7 +76,7 @@ export default function CabinetPage() {
         <div className="container-site grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:items-center">
           <Figure
             src="/images/espace-attente-couloir.jpg"
-            alt="Autre vue de la salle de soin du cabinet du Dr Avi Cohen"
+            alt="Autre vue de la salle de soin du cabinet des Docteurs Cohen"
             className="aspect-[4/3]"
           />
           <div>

@@ -12,7 +12,7 @@ import { specialties, siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Dentisterie numérique (CFAO)",
   description:
-    "La dentisterie numérique au cabinet du Dr Avi Cohen à Paris 12e : empreintes optiques, conception et fabrication assistées par ordinateur (CFAO).",
+    "La dentisterie numérique au cabinet des Docteurs Cohen à Paris 12e : empreintes optiques, conception et fabrication assistées par ordinateur (CFAO).",
   openGraph: {
     title: `Dentisterie numérique (CFAO) - ${siteConfig.practiceName}`,
     description:

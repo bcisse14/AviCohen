@@ -11,7 +11,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Espace patient",
   description:
-    "Espace patient du cabinet du Dr Avi Cohen : informations pratiques avant votre venue, prise en charge et réponses aux questions fréquentes.",
+    "Espace patient du cabinet des Docteurs Cohen : informations pratiques avant votre venue, prise en charge et réponses aux questions fréquentes.",
   openGraph: {
     title: `Espace patient - ${siteConfig.practiceName}`,
     description:

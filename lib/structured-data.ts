@@ -29,6 +29,12 @@ export function getDentistStructuredData() {
       dayOfWeek: slot.days,
       description: slot.hours,
     })),
+    employee: team.map((member) => ({
+      "@type": "Person",
+      name: member.name,
+      jobTitle: member.title,
+      url: member.doctolibUrl,
+    })),
     sameAs: team.map((member) => member.doctolibUrl),
   } as const;
 }

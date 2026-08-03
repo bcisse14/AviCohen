@@ -11,16 +11,16 @@
  */
 
 export const siteConfig = {
-  name: "Dr Avi Cohen",
-  practiceName: "Cabinet du Dr Avi Cohen",
-  tagline: "Chirurgien-dentiste à Paris 12e",
+  name: "Docteurs Cohen",
+  practiceName: "Cabinet des Docteurs Cohen",
+  tagline: "Chirurgiens-dentistes à Paris 12e",
   // TODO (client) : remplacer par le nom de domaine définitif une fois
   // réservé. Utilisé pour le sitemap, robots.txt, Open Graph et les
   // données structurées.
   url: "https://www.dr-avi-cohen-dentiste.fr",
   locale: "fr_FR",
   description:
-    "Cabinet dentaire du Dr Avi Cohen à Paris 12e, spécialisé en implantologie, esthétique dentaire et dentisterie numérique (CFAO).",
+    "Cabinet dentaire des Docteurs Cohen à Paris 12e, spécialisé en implantologie, esthétique dentaire et dentisterie numérique (CFAO).",
   address: {
     streetAddress: "87 avenue du général Michel Bizot",
     postalCode: "75012",
@@ -28,11 +28,10 @@ export const siteConfig = {
     addressRegion: "Île-de-France",
     addressCountry: "FR",
   },
-  // TODO (client) : numéro de téléphone non communiqué.
-  phone: "+33 1 00 00 00 00",
+  phone: "01.43.40.98.38",
   // Sert aussi de destinataire par défaut pour le formulaire si la
   // variable d'environnement CONTACT_EMAIL_TO n'est pas définie.
-  email: "docteurcohena@gmail.com",
+  email: "docteurcoheng@gmail.com",
   // TODO (client) : horaires réels non communiqués.
   openingHours: [
     { days: "Lundi - Vendredi", hours: "9h00 - 19h00" },
@@ -73,13 +72,10 @@ export const team: TeamMember[] = [
   {
     slug: "gilles-cohen",
     name: "Dr Gilles Cohen",
-    title: "Chirurgien-dentiste associé",
+    title: "Chirurgien-dentiste",
     photo: "/images/Cohen_Gilles.webp",
-    photoAlt: "Portrait du Dr Gilles Cohen, chirurgien-dentiste associé",
-    // TODO (client) : spécialité ou parcours de Gilles Cohen non
-    // communiqués à ce jour. Bio volontairement générale, à préciser dès
-    // réception d'informations complémentaires.
-    bio: "Le Dr Gilles Cohen est chirurgien-dentiste associé au sein du cabinet. Sa présentation détaillée sera complétée dès que ses informations professionnelles seront confirmées.",
+    photoAlt: "Portrait du Dr Gilles Cohen, chirurgien-dentiste",
+    bio: "Le Dr Gilles Cohen accompagne les patients du cabinet en proposant une prise en charge attentive, fondée sur l'écoute, la pédagogie et la précision des gestes cliniques à chaque étape du traitement.",
     doctolibUrl:
       "https://www.doctolib.fr/dentiste/paris/gilles-cohen/booking/motives?specialityId=1&telehealth=false&placeId=practice-262&profile_skipped=true&source=external_referral",
   },

@@ -6,11 +6,11 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Galerie photo",
   description:
-    "Galerie photo du cabinet du Dr Avi Cohen à Paris 12e : découvrez l'ambiance et les espaces du cabinet.",
+    "Galerie photo du cabinet des Docteurs Cohen à Paris 12e : découvrez l'ambiance et les espaces du cabinet.",
   openGraph: {
     title: `Galerie photo - ${siteConfig.practiceName}`,
     description:
-      "Découvrez l'ambiance et les espaces du cabinet du Dr Avi Cohen.",
+      "Découvrez l'ambiance et les espaces du cabinet des Docteurs Cohen.",
     images: ["/images/deco-miroir-detail.jpg"],
   },
 };
@@ -18,12 +18,12 @@ export const metadata: Metadata = {
 const photos = [
   {
     src: "/images/accueil-secretariat-02.jpg",
-    alt: "Espace accueil et secrétariat du cabinet du Dr Avi Cohen",
+    alt: "Espace accueil et secrétariat du cabinet des Docteurs Cohen",
     caption: "L'accueil du cabinet",
   },
   {
     src: "/images/cabinet-detail-salle-02.jpg",
-    alt: "Détail d'une salle de soin du cabinet du Dr Avi Cohen",
+    alt: "Détail d'une salle de soin du cabinet des Docteurs Cohen",
     caption: "Détail d'une salle de soin",
   },
   {

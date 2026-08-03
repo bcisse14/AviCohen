@@ -42,7 +42,7 @@ export function Footer() {
             <li className="flex items-center gap-2">
               <IconPhone className="h-5 w-5 shrink-0 text-accent" />
               <a
-                href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+                href={`tel:${siteConfig.phone.replace(/[^\d+]/g, "")}`}
                 className="no-underline hover:text-accent"
               >
                 {siteConfig.phone}

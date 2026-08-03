@@ -15,7 +15,7 @@ import { getDentistStructuredData } from "@/lib/structured-data";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contactez le cabinet du Dr Avi Cohen à Paris 12e : coordonnées, horaires, formulaire de contact et rendez-vous en ligne via Doctolib.",
+    "Contactez le cabinet des Docteurs Cohen à Paris 12e : coordonnées, horaires, formulaire de contact et rendez-vous en ligne via Doctolib.",
   openGraph: {
     title: `Contact - ${siteConfig.practiceName}`,
     description:
@@ -66,7 +66,7 @@ export default function ContactPage() {
                 <li className="flex items-center gap-3">
                   <IconPhone className="h-6 w-6 shrink-0 text-accent" />
                   <a
-                    href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+                    href={`tel:${siteConfig.phone.replace(/[^\d+]/g, "")}`}
                     className="text-ink no-underline hover:text-accent"
                   >
                     {siteConfig.phone}

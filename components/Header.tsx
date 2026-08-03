@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
-import { navigation, siteConfig } from "@/lib/site-config";
+import { navigation, siteConfig, team } from "@/lib/site-config";
 import { IconClose, IconMenu } from "@/components/icons";
 
 export function Header() {
@@ -66,15 +66,29 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="hidden shrink-0 lg:block">
-          <Link
-            href={siteConfig.doctolibUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary whitespace-nowrap !px-5 !py-2.5 text-sm"
-          >
-            Prendre rendez-vous
-          </Link>
+        <div className="relative hidden shrink-0 lg:block">
+          <details className="group">
+            <summary className="btn-primary cursor-pointer whitespace-nowrap !px-5 !py-2.5 text-sm marker:content-none">
+              Prendre rendez-vous
+            </summary>
+            <div className="absolute right-0 top-full z-20 mt-3 w-72 rounded-xl border border-border bg-surface p-3 shadow-xl">
+              <p className="px-2 pb-2 text-sm text-muted">Avec quel praticien ?</p>
+              <ul className="flex flex-col gap-2">
+                {team.map((member) => (
+                  <li key={member.slug}>
+                    <Link
+                      href={member.doctolibUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block rounded-lg border border-border px-3 py-2 text-sm text-ink no-underline transition-colors hover:border-accent hover:text-accent"
+                    >
+                      {member.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </details>
         </div>
 
         <button
@@ -122,15 +136,24 @@ export function Header() {
                 ) : null}
               </li>
             ))}
-            <li className="mt-2">
-              <Link
-                href={siteConfig.doctolibUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary w-full"
-              >
-                Prendre rendez-vous
-              </Link>
+            <li className="mt-2 rounded-xl border border-border bg-surface p-3">
+              <p className="text-base font-medium text-ink">Prendre rendez-vous</p>
+              <p className="mt-1 text-sm text-muted">Choisissez votre praticien</p>
+              <ul className="mt-3 flex flex-col gap-2">
+                {team.map((member) => (
+                  <li key={member.slug}>
+                    <Link
+                      href={member.doctolibUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary w-full"
+                      onClick={() => setOpen(false)}
+                    >
+                      {member.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </li>
           </ul>
         </nav>

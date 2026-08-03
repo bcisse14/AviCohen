@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Implantologie dentaire",
   description:
-    "L'implantologie dentaire au cabinet du Dr Avi Cohen à Paris 12e : remplacement durable des dents manquantes, étapes du traitement et suivi personnalisé.",
+    "L'implantologie dentaire au cabinet des Docteurs Cohen à Paris 12e : remplacement durable des dents manquantes, étapes du traitement et suivi personnalisé.",
   openGraph: {
     title: `Implantologie dentaire - ${siteConfig.practiceName}`,
     description:

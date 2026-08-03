@@ -5,7 +5,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Mentions légales",
   description:
-    "Mentions légales du site du cabinet du Dr Avi Cohen : éditeur, hébergement, propriété intellectuelle et informations de contact.",
+    "Mentions légales du site du cabinet des Docteurs Cohen : éditeur, hébergement, propriété intellectuelle et informations de contact.",
   openGraph: {
     title: `Mentions légales - ${siteConfig.practiceName}`,
     description:

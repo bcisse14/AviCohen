@@ -54,7 +54,7 @@ const montagePrincipal = {
 export const metadata: Metadata = {
   title: "Esthétique dentaire",
   description:
-    "Esthétique dentaire au cabinet du Dr Avi Cohen à Paris 12e : éclaircissement, facettes et harmonisation du sourire, avec un rendu naturel.",
+    "Esthétique dentaire au cabinet des Docteurs Cohen à Paris 12e : éclaircissement, facettes et harmonisation du sourire, avec un rendu naturel.",
   openGraph: {
     title: `Esthétique dentaire - ${siteConfig.practiceName}`,
     description:

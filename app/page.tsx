@@ -18,11 +18,11 @@ import { getDentistStructuredData } from "@/lib/structured-data";
 export const metadata: Metadata = {
   title: `${siteConfig.practiceName} - ${siteConfig.tagline}`,
   description:
-    "Cabinet dentaire à Paris 12e : implantologie, esthétique dentaire et dentisterie numérique (CFAO), dans un cadre soigné et accueillant.",
+    "Cabinet dentaire des Docteurs Cohen à Paris 12e : implantologie, esthétique dentaire et dentisterie numérique (CFAO), dans un cadre soigné et accueillant.",
   openGraph: {
     title: `${siteConfig.practiceName} - ${siteConfig.tagline}`,
     description:
-      "Cabinet dentaire à Paris 12e : implantologie, esthétique dentaire et dentisterie numérique (CFAO).",
+      "Cabinet dentaire des Docteurs Cohen à Paris 12e : implantologie, esthétique dentaire et dentisterie numérique (CFAO).",
     images: ["/images/cabinet-salle-soin-01.jpg"],
   },
 };
@@ -41,7 +41,7 @@ export default function AccueilPage() {
               l&apos;aise
             </h1>
             <p className="mt-6 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
-              Les Dr Avi Cohen et Dr Gilles Cohen accompagnent leurs
+              Les Docteurs Avi Cohen et Gilles Cohen accompagnent leurs
               patients à Paris 12e en implantologie, esthétique dentaire
               et dentisterie numérique, avec une attention constante
               portée au confort et à la clarté des explications.
@@ -56,7 +56,7 @@ export default function AccueilPage() {
 
           <Figure
             src="/images/cabinet-salle-soin-01.jpg"
-            alt="Salle de soin du cabinet du Dr Avi Cohen, équipée et lumineuse"
+            alt="Salle de soin du cabinet des Docteurs Cohen, équipée et lumineuse"
             className="aspect-[4/3] lg:aspect-[5/4]"
             priority
           />
@@ -71,7 +71,7 @@ export default function AccueilPage() {
               Un cabinet proche de la Porte Dorée
             </h2>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-              Le cabinet du Dr Avi Cohen est situé à Paris, à proximité de la
+              Le cabinet des Docteurs Cohen est situé à Paris, à proximité de la
               Porte Dorée, dans un cadre facilement accessible. Il est animé
               par deux praticiens, pour un accompagnement personnalisé à
               chaque étape de votre suivi dentaire.
@@ -106,7 +106,7 @@ export default function AccueilPage() {
                 <li className="flex items-center gap-3">
                   <IconPhone className="h-5 w-5 shrink-0 text-accent" />
                   <a
-                    href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+                    href={`tel:${siteConfig.phone.replace(/[^\d+]/g, "")}`}
                     className="no-underline hover:text-accent"
                   >
                     {siteConfig.phone}
@@ -116,14 +116,17 @@ export default function AccueilPage() {
             </div>
 
             <div className="flex flex-wrap gap-4">
-              <Link
-                href={siteConfig.doctolibUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                Prendre rendez-vous
-              </Link>
+              {team.map((member) => (
+                <Link
+                  key={member.slug}
+                  href={member.doctolibUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary whitespace-nowrap"
+                >
+                  Rendez-vous avec {member.name}
+                </Link>
+              ))}
               <CTALink href="/contact" variant="secondary">
                 Nous contacter
               </CTALink>
