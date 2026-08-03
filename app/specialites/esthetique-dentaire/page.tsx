@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Figure } from "@/components/Figure";
+import { MoreDetails } from "@/components/MoreDetails";
 import { CTALink, Eyebrow } from "@/components/ui";
 import {
   IconCalendar,
@@ -79,6 +80,27 @@ const prestations = [
   },
 ];
 
+const detailsEsthetique = [
+  {
+    title: "Facettes céramiques en une seule séance",
+    paragraphs: [
+      "Après préparation de la dent, une empreinte optique remplace l'empreinte traditionnelle. La facette est conçue numériquement puis fabriquée sur place, avant d'être collée directement, souvent en une seule séance.",
+    ],
+  },
+  {
+    title: "Couronnes esthétiques",
+    paragraphs: [
+      "Le même principe s'applique à la réalisation de couronnes complètes, avec un rendu naturel proche de la dent d'origine, sans les délais habituellement nécessaires à un laboratoire externe.",
+    ],
+  },
+  {
+    title: "Remplacement d'anciennes restaurations",
+    paragraphs: [
+      "Les anciens amalgames ou restaurations vieillissantes peuvent être remplacés par des inlays ou onlays en céramique, réalisés eux aussi en une seule séance grâce aux outils numériques du cabinet.",
+    ],
+  },
+];
+
 export default function EsthetiqueDentairePage() {
   return (
     <>
@@ -103,6 +125,10 @@ export default function EsthetiqueDentairePage() {
               proposé après un échange sur vos attentes et un examen
               clinique complet.
             </p>
+            <MoreDetails
+              heading="Des restaurations esthétiques réalisées avec précision"
+              items={detailsEsthetique}
+            />
           </div>
           {montagePrincipal ? (
             <Figure

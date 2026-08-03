@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { PageHero } from "@/components/PageHero";
 import { Figure } from "@/components/Figure";
 import { ImagePlaceholder } from "@/components/ImagePlaceholder";
+import { MoreDetails } from "@/components/MoreDetails";
 import { CTALink, Eyebrow } from "@/components/ui";
 import { IconCalendar } from "@/components/icons";
 import { specialties, siteConfig } from "@/lib/site-config";
@@ -25,6 +26,33 @@ const detailPrinterImageSrc = "/images/cfao-imprimante-3d-detail.jpg";
 const hasDetailPrinterImage = existsSync(
   join(process.cwd(), "public", "images", "cfao-imprimante-3d-detail.jpg"),
 );
+
+const detailsNumerique = [
+  {
+    title: "L'empreinte optique",
+    paragraphs: [
+      "Un scanner intra oral capture directement la bouche du patient, sans pâte ni porte empreinte. Le modèle numérique obtenu est visible à l'écran presque instantanément.",
+    ],
+  },
+  {
+    title: "La conception assistée par ordinateur",
+    paragraphs: [
+      "À partir de cette empreinte, la restauration (couronne, facette, inlay ou onlay) est modélisée numériquement. Cette étape permet d'ajuster la forme et les proportions avant toute fabrication.",
+    ],
+  },
+  {
+    title: "La fabrication assistée par ordinateur",
+    paragraphs: [
+      "Une fois le projet validé, les données sont envoyées vers les outils de fabrication du cabinet, qui produisent la restauration directement sur place, en réduisant les délais et le nombre de rendez-vous nécessaires.",
+    ],
+  },
+  {
+    title: "Les avantages de cette approche",
+    paragraphs: [
+      "Une céramique biocompatible et sans métal, une précision renforcée par la numérisation, un confort accru pour le patient, et dans de nombreux cas, un traitement réalisable en une seule séance.",
+    ],
+  },
+];
 
 export default function DentisterieNumeriquePage() {
   const images = numerique?.images ?? [];
@@ -50,6 +78,10 @@ export default function DentisterieNumeriquePage() {
               Le confort est immédiat et le résultat peut être visualisé
               directement à l&apos;écran avec vous.
             </p>
+            <MoreDetails
+              heading="Comment fonctionne la CFAO au cabinet"
+              items={detailsNumerique}
+            />
           </div>
           {images[1] ? (
             <Figure
