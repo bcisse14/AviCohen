@@ -95,53 +95,52 @@ export default function AccueilPage() {
           <h2 className="mt-4 max-w-xl text-3xl sm:text-4xl">
             Coordonnées et prise de rendez-vous
           </h2>
-          <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
-            <div className="rounded-2xl border border-border bg-surface p-7">
-              <ul className="flex flex-col gap-5 text-sm text-muted sm:text-base">
-                <li className="flex items-start gap-3">
-                  <IconPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                  <span>
-                    {siteConfig.address.streetAddress}
-                    <br />
-                    {siteConfig.address.postalCode} {siteConfig.address.addressLocality}
-                  </span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <IconPhone className="h-5 w-5 shrink-0 text-accent" />
-                  <a
-                    href={`tel:${siteConfig.phone.replace(/[^\d+]/g, "")}`}
-                    className="no-underline hover:text-accent"
+          <div className="mt-10 rounded-2xl border border-border bg-surface p-6 sm:p-8">
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
+              <div>
+                <ul className="flex flex-col gap-5 text-sm text-muted sm:text-base">
+                  <li className="flex items-start gap-3">
+                    <IconPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                    <span>
+                      {siteConfig.address.streetAddress}
+                      <br />
+                      {siteConfig.address.postalCode} {siteConfig.address.addressLocality}
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <IconPhone className="h-5 w-5 shrink-0 text-accent" />
+                    <a
+                      href={`tel:${siteConfig.phone.replace(/[^\d+]/g, "")}`}
+                      className="no-underline hover:text-accent"
+                    >
+                      {siteConfig.phone}
+                    </a>
+                  </li>
+                </ul>
+                <p className="mt-5 text-sm leading-relaxed text-muted">
+                  La carte est centrée sur l&apos;adresse du cabinet pour vous
+                  aider à préparer votre venue.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                {team.map((member) => (
+                  <Link
+                    key={member.slug}
+                    href={member.doctolibUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary w-full"
                   >
-                    {siteConfig.phone}
-                  </a>
-                </li>
-              </ul>
+                    Rendez-vous avec {member.name}
+                  </Link>
+                ))}
+                <CTALink href="/contact" variant="secondary">
+                  Nous contacter
+                </CTALink>
+              </div>
             </div>
 
-            <div className="flex flex-wrap gap-4">
-              {team.map((member) => (
-                <Link
-                  key={member.slug}
-                  href={member.doctolibUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary whitespace-nowrap"
-                >
-                  Rendez-vous avec {member.name}
-                </Link>
-              ))}
-              <CTALink href="/contact" variant="secondary">
-                Nous contacter
-              </CTALink>
-            </div>
-          </div>
-
-          <div className="mt-8 rounded-2xl border border-border bg-surface p-6 sm:p-8">
-            <h3 className="text-xl text-ink">Plan d&apos;accès</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted">
-              La carte est centrée sur l&apos;adresse du cabinet pour vous
-              aider à préparer votre venue.
-            </p>
             <div className="mt-6 overflow-hidden rounded-2xl border border-border">
               <iframe
                 title="Carte Google Maps du cabinet"
