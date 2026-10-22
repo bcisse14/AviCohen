@@ -13,7 +13,7 @@ import type { PublicationTarget } from "@/lib/cms/publication";
 
 type Tab = "pages" | "settings" | "announcements" | "media" | "history";
 type Version = { id: string; reason: string; createdAt: string };
-const date = (value: string) => new Date(value).toLocaleString("fr-FR");
+const date = (value: string) => new Date(value).toLocaleString("fr-FR", { timeZone: "Europe/Paris" });
 
 function PagePathEditor({ value, rename }: { value: string; rename: (value: string) => void }) {
   const [next, setNext] = useState(value);

@@ -35,7 +35,7 @@ export type Query = <T extends Record<string, unknown> = Record<string, unknown>
 let connection: ReturnType<typeof neon> | undefined;
 function getConnection() {
   if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL manquante.");
-  connection ??= neon(process.env.DATABASE_URL);
+  connection ??= neon(process.env.DATABASE_URL, { fetchOptions: { cache: "no-store" } });
   return connection;
 }
 export const query: Query = async <T extends Record<string, unknown>>(sql: string, params: unknown[] = []) => {

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { blockLabels, blockTypes, type Block, type CmsImage } from "@/lib/cms/schema";
 import { Check, Field, ListEditor, Select, TextEditor } from "./Fields";
 import { ImageEditor } from "./MediaLibrary";
@@ -22,6 +23,8 @@ export function BlockEditor({ block, onChange, chooseImage, fixedType = false, p
   block: Block; onChange: (block: Block) => void; chooseImage: ChooseImage; fixedType?: boolean;
   publication?: { busy: boolean; dirty: boolean; save: (publish: boolean | PublicationTarget) => Promise<void>; target: PublicationTarget };
 }) {
+  const [timeZone, setTimeZone] = useState("");
+  useEffect(() => { setTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone); }, []);
   const hasImages = ["split", "image", "gallery", "announcement"].includes(block.type);
   return <div className="min-w-0 space-y-5">
     {block.type === "announcement" && <p className="rounded-xl border border-border p-4 text-sm text-muted">
@@ -50,9 +53,9 @@ export function BlockEditor({ block, onChange, chooseImage, fixedType = false, p
     <details className="rounded-xl border border-border p-4">
       <summary className="cursor-pointer text-sm">Programmation de l’affichage (facultative)</summary>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
-        <Field type="datetime-local" label="Début" value={dateInput(block.startsAt)} onChange={(value) => onChange({ ...block, startsAt: value ? new Date(value).toISOString() : "" })} />
-        <Field type="datetime-local" label="Fin" value={dateInput(block.endsAt)} onChange={(value) => onChange({ ...block, endsAt: value ? new Date(value).toISOString() : "" })} />
-      </div><p className="mt-3 text-xs text-muted">Heure locale de votre navigateur ({Intl.DateTimeFormat().resolvedOptions().timeZone}). Après publication, l’affichage est calculé à chaque visite, sans redéploiement.</p>
+        <Field type="datetime-local" label="Début" value={timeZone ? dateInput(block.startsAt) : ""} onChange={(value) => onChange({ ...block, startsAt: value ? new Date(value).toISOString() : "" })} />
+        <Field type="datetime-local" label="Fin" value={timeZone ? dateInput(block.endsAt) : ""} onChange={(value) => onChange({ ...block, endsAt: value ? new Date(value).toISOString() : "" })} />
+      </div><p className="mt-3 text-xs text-muted">Heure locale de votre navigateur ({timeZone || "détection en cours"}). Après publication, l’affichage est calculé à chaque visite, sans redéploiement.</p>
     </details>
     {hasImages && <div className="space-y-4">
       <ListEditor<CmsImage> label="Images" items={block.images} onChange={(images) => onChange({ ...block, images })}

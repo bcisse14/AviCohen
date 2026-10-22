@@ -2,6 +2,11 @@
 
 Next.js 14, React et Tailwind. Le mini CMS intégré est accessible à `/admin`.
 Les pages publiques utilisent uniquement la version publiée, jamais le brouillon.
+Les requêtes HTTP du pilote Neon désactivent explicitement le cache Next.js
+(`cache: "no-store"`) pour lire les publications et les révisions à jour.
+Les dates de suivi du CMS sont affichées dans le fuseau Europe/Paris ; le fuseau
+local de programmation est détecté après hydratation pour éviter un décalage
+entre le serveur Vercel et le navigateur.
 
 Le serveur `npm run dev` utilise `.next-dev`, tandis que `npm run build` et
 `npm start` utilisent `.next`. Cette séparation permet de vérifier une compilation

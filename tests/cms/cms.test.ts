@@ -391,6 +391,7 @@ test("la connexion accepte un identifiant ou un ancien e-mail et conserve les pr
     process.env.CMS_SESSION_SECRET = "s".repeat(64);
     process.env.DATABASE_URL = "postgresql://test:test@localhost/test";
     neonConfig.fetchFunction = async (_url: unknown, options?: RequestInit) => {
+      assert.equal(options?.cache, "no-store");
       const body: unknown = JSON.parse(String(options?.body));
       if (typeof body === "object" && body !== null && "queries" in body && Array.isArray(body.queries)) {
         return Response.json({ results: body.queries.map(() => ({ fields: [], rows: [] })) });

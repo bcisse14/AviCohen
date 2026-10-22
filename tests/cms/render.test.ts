@@ -20,6 +20,25 @@ import { ImageEditor, MediaLibrary } from "../../components/cms/admin/MediaLibra
 // The tsx runner follows the repository's preserved JSX mode.
 Object.assign(globalThis, { React });
 
+test("le rendu initial de l’administration est identique quel que soit le fuseau serveur", () => {
+  const previous = process.env.TZ;
+  const draft = structuredClone(initialDocument);
+  draft.pages[0]!.blocks[0]!.startsAt = "2026-10-22T12:00:00.000Z";
+  const render = () => renderToStaticMarkup(React.createElement(Editor, {
+    initialState: { draft, revision: 1, updatedAt: "2026-10-22T12:00:00.000Z", publishedAt: "2026-10-22T12:00:00.000Z" },
+    originalMedia: [], uploadedMedia: [], uploadsEnabled: false,
+  }));
+  try {
+    process.env.TZ = "UTC";
+    const utc = render();
+    process.env.TZ = "Europe/Paris";
+    assert.equal(render(), utc);
+    assert.ok(utc.includes("détection en cours"));
+  } finally {
+    if (previous === undefined) delete process.env.TZ;
+    else process.env.TZ = previous;
+  }
+});
 test("les images sélectionnées sont visibles et les prérequis d’import sont explicites", () => {
   const image = { src: "/images/cabinet-salle-soin-01.jpg", alt: "Salle de soin", caption: "", fit: "contain" as const, position: "center" as const, ratio: "landscape" as const };
   const html = renderToStaticMarkup(React.createElement(ImageEditor, { image, onChange: () => {}, onChoose: () => {} }));
