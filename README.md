@@ -3,6 +3,10 @@
 Next.js 14, React et Tailwind. Le mini CMS intégré est accessible à `/admin`.
 Les pages publiques utilisent uniquement la version publiée, jamais le brouillon.
 
+Le serveur `npm run dev` utilise `.next-dev`, tandis que `npm run build` et
+`npm start` utilisent `.next`. Cette séparation permet de vérifier une compilation
+de production sans écraser les fichiers CSS et JavaScript du serveur de développement.
+
 ## Installation
 
 ```sh
@@ -24,8 +28,11 @@ dans une conversation ni le passer en argument de commande.
    la chaîne PostgreSQL Neon fournie par l'intégration.
 3. Créer un **Vercel Blob Store public** et le connecter au projet :
    `BLOB_READ_WRITE_TOKEN` permet l'import d'images.
-4. Définir `CMS_ADMIN_EMAIL`, `CMS_ADMIN_PASSWORD_HASH` et `CMS_SESSION_SECRET`
+4. Définir `CMS_ADMIN_USERNAME` (par exemple `avicohen`),
+   `CMS_ADMIN_PASSWORD_HASH` et `CMS_SESSION_SECRET`
    (au moins 48 caractères ; utiliser la valeur générée par la commande).
+   Les installations existantes utilisant `CMS_ADMIN_EMAIL` restent compatibles :
+   l'adresse e-mail sert d'identifiant si `CMS_ADMIN_USERNAME` n'est pas défini.
 5. Pour le formulaire de contact, conserver `RESEND_API_KEY` et
    `CONTACT_EMAIL_FROM`. L'expéditeur doit être autorisé chez Resend.
 6. Déployer puis ouvrir `/admin`. La création des tables `cms_*` et l'import
@@ -46,6 +53,12 @@ remontée : le site ne prétend pas avoir enregistré ou publié un contenu.
 Sans clé Blob, les images existantes sont utilisables, mais les imports sont
 désactivés avec une explication dans l'interface.
 
+Sur `/admin`, saisir l'identifiant configuré et le mot de passe associé à
+l'empreinte scrypt. Aucun mot de passe par défaut n'est intégré au code.
+Un fichier `.env.development.local` permet de configurer un accès local sans
+modifier `.env.local` ; il est ignoré par Git et n'est pas chargé en production.
+Pour le site en ligne, définir les mêmes variables dans les secrets Vercel.
+
 `CONTACT_EMAIL_TO` reste utilisé **uniquement avant l'activation du CMS**.
 Après activation, le destinataire se modifie dans `/admin`, sans redéploiement.
 
@@ -64,15 +77,18 @@ Après activation, le destinataire se modifie dans `/admin`, sans redéploiement
   fond ; une à quatre colonnes ; photos à gauche ou à droite ; format, cadrage et
   point d'intérêt par image. Les colonnes s'empilent automatiquement sur mobile.
   Les annonces et les textes n'ont pas de hauteur fixe.
-- **Annonces** : bloc dans une page ou annonces globales sous le menu, avec texte,
+- **Annonces** : fenêtres au premier plan, locales à une page ou globales, avec texte,
   images, boutons et dates facultatives. Les dates sont saisies à l'heure locale
   du navigateur et stockées en UTC. La fin est exclusive. Les annonces
   programmées apparaissent à leur échéance **si elles ont été publiées**.
   **Toutes les annonces sont obligatoirement fermables**, sans option de blocage :
-  boutons visibles en haut et en bas (utile pour les textes longs), utilisables
-  au clavier et sur mobile ; Échap ferme l'annonce lorsque le focus est dedans.
-  Après fermeture, le focus rejoint le contenu suivant. Aucune annonce ne bloque
-  le défilement ou la navigation.
+  un seul bouton **Fermer**, toujours accessible dans l'en-tête, Échap ou clic
+  sur le fond. Les annonces apparaissent une par une, sans empiler les fenêtres.
+  Les longs contenus défilent dans la fenêtre, sans masquer la fermeture.
+  Le focus reste dans la fenêtre ; le défilement de la page est suspendu puis
+  restauré à la fermeture, avec retour du focus à son emplacement précédent.
+  Une photo peut être agrandie au-dessus de l'annonce : fermer la photo ne ferme
+  pas l'annonce.
   La fermeture est conservée par onglet avec `sessionStorage`, pendant la visite,
   y compris les changements de page et les rechargements. Un contenu modifié ou
   une nouvelle programmation peut réafficher l'annonce ; les annonces des autres
@@ -82,6 +98,13 @@ Après activation, le destinataire se modifie dans `/admin`, sans redéploiement
   rechargement ; un avertissement technique est journalisé dans la console.
 - **Médiathèque** : réutiliser les images du site, importer de nouvelles images,
   puis modifier leur description accessible et leur légende dans chaque bloc.
+  Un aperçu du fichier sélectionné apparaît avant l'import, avec son nom et sa
+  taille ; il peut être retiré ou remplacé sans envoyer le fichier. Les images
+  des blocs, de la médiathèque et l'image de partage de chaque page sont également
+  affichées en aperçu.
+  L'import exige un fichier JPEG, PNG ou WebP et une description accessible.
+  Le bouton indique les champs manquants ou un fichier invalide par un message
+  explicite ; une confirmation s'affiche après un import réussi.
   JPEG, PNG et WebP non animés, 3 Mo et 25 mégapixels maximum par fichier ;
   conversion WebP, métadonnées supprimées et côté maximal de 2 400 pixels.
   Ne publier des photos cliniques qu'avec les autorisations appropriées.
@@ -103,8 +126,34 @@ Après activation, le destinataire se modifie dans `/admin`, sans redéploiement
   permanente de l'ancienne adresse vers la page est conservée. Les liens externes
   qui ont été copiés manuellement doivent être vérifiés.
 - **Brouillon et publication** : enregistrer, prévisualiser dans une page privée
-  authentifiée, puis cliquer sur **Publier tout**. Cette action publie l'ensemble
-  des pages et des réglages du brouillon, pas seulement la page affichée.
+  authentifiée, puis choisir le périmètre à publier :
+  - **Publier uniquement cette annonce** ou **Publier uniquement ce bloc** en bas
+    de son éditeur, pour un élément global ou un bloc d'une page déjà en ligne.
+  - **Publier uniquement cette page** pour une page entière, ses informations et
+    tous ses blocs. C'est nécessaire lors de la création d'une nouvelle page.
+  - **Publier uniquement les réglages** sans les annonces globales ni les pages.
+    Les coordonnées, l'équipe et les autres réglages partagés changent sur tout
+    le site ; un bloc publié seul utilise les réglages déjà en ligne.
+  - **Publier tout** dans la barre supérieure pour tout le brouillon.
+  Chaque publication demande confirmation. La publication individuelle enregistre
+  aussi les autres modifications en brouillon, sans les mettre en ligne, et
+  conserve les suppressions et l'ordre des éléments existants encore publiés.
+  Les nouveaux éléments sont insérés près de leurs voisins déjà publiés.
+  Pour publier un réordonnancement ou une suppression de bloc ordinaire, publier
+  la page entière. Pour les annonces, **Retirer l’annonce du site** supprime
+  directement l'annonce du brouillon et de la version publiée, après confirmation,
+  sans publier les autres contenus.
+  Dans **Annonces sur tout le site**, **Retirer toutes les annonces du site**
+  supprime toutes les annonces globales et tous les blocs d'annonce dans les pages,
+  y compris les annonces publiées déjà absentes du brouillon. Les autres contenus
+  publiés restent inchangés ; les modifications privées sont enregistrées en
+  brouillon. Les pages publiques déjà ouvertes doivent être actualisées.
+  L'historique conserve le brouillon précédent ; sa restauration ne republie rien.
+  Un lien vers une page encore privée bloque la publication individuelle avec une
+  explication : publier d'abord cette page. Une page renommée conserve une
+  redirection depuis son ancienne adresse sans publier les autres pages.
+  Une annonce masquée ou hors de sa période de programmation reste invisible,
+  même après publication.
   Ajouter une page au menu reste une action explicite dans les réglages.
 - **Historique** : les 30 états précédant les derniers enregistrements/publications
   sont restaurables. La restauration remplace le brouillon et ne publie pas.
@@ -114,9 +163,13 @@ Après activation, le destinataire se modifie dans `/admin`, sans redéploiement
   fermé malgré son avertissement.
 - **Sauvegarde** : export/import des contenus en JSON. L'export contient les URLs
   des images, pas les fichiers image. Prévoir aussi des sauvegardes Neon et Blob.
-  Retirer une image importée de la médiathèque **ne supprime pas son fichier** :
-  les publications et les anciennes versions continuent à fonctionner. La purge
-  définitive du stockage reste une opération technique, après contrôle des usages.
+  **Supprimer définitivement** dans la médiathèque efface une image importée et
+  son fichier Vercel Blob après confirmation. Cette action irréversible est refusée
+  si son URL apparaît dans le brouillon, le site publié, l'une des 30 versions de
+  l'historique ou un autre média. Les images d'origine intégrées au projet restent
+  protégées. Une URL supprimée est bloquée pour les nouveaux enregistrements,
+  y compris depuis un ancien onglet. En cas d'échec du stockage, le média reste
+  visible : recharger l'administration puis réessayer sa suppression.
 
 Le modèle encadre volontairement le design pour éviter de casser le mobile :
 pas de positionnement absolu, scripts, HTML libre ou éditeur CSS. Limites de

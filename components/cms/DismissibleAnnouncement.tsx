@@ -1,10 +1,16 @@
 "use client";
 
-import { useRef, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useId, useRef, useSyncExternalStore, type ReactNode } from "react";
 import { IconClose } from "@/components/icons";
 
 const dismissed = new Set<string>();
 const listeners = new Set<() => void>();
+const queue = new Map<string, string>();
+function notify() { listeners.forEach((listener) => listener()); }
+function activeAnnouncement() {
+  for (const [id, key] of queue) if (!isDismissed(key)) return id;
+  return "";
+}
 let storageWarningShown = false;
 function reportStorageError(error: unknown) {
   if (storageWarningShown) return;
@@ -25,49 +31,62 @@ function subscribe(listener: () => void) {
   return () => { listeners.delete(listener); };
 }
 
-function nextContent(root: HTMLElement) {
-  const candidates = document.querySelectorAll<HTMLElement>("h1, h2, a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]");
-  return Array.from(candidates).find((element) =>
-    !root.contains(element) && Boolean(root.compareDocumentPosition(element) & Node.DOCUMENT_POSITION_FOLLOWING) &&
-    !element.closest("[hidden], [inert]") && element.getClientRects().length > 0,
-  );
-}
-
-export function DismissibleAnnouncement({ storageKey, title, children }: {
-  storageKey: string; title: string; children: ReactNode;
+export function DismissibleAnnouncement({ storageKey, title, children, widthClass = "max-w-content" }: {
+  storageKey: string; title: string; children: ReactNode; widthClass?: string;
 }) {
-  const root = useRef<HTMLDivElement>(null);
-  const closed = useSyncExternalStore(subscribe, () => isDismissed(storageKey), () => false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const id = useId();
+  const titleId = `${id}-title`;
+  const active = useSyncExternalStore(subscribe, activeAnnouncement, () => "") === id;
+  useEffect(() => {
+    queue.set(id, storageKey);
+    notify();
+    return () => { queue.delete(id); notify(); };
+  }, [id, storageKey]);
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!active || !dialog) return;
+    const previousFocus = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    dialog.showModal();
+    document.body.style.overflow = "hidden";
+    return () => {
+      if (dialog.open) dialog.close();
+      document.body.style.overflow = previousOverflow;
+      if (previousFocus instanceof HTMLElement && previousFocus.isConnected) previousFocus.focus({ preventScroll: true });
+    };
+  }, [active]);
   function dismiss() {
-    const next = root.current ? nextContent(root.current) : undefined;
     dismissed.add(storageKey);
     try { sessionStorage.setItem(storageKey, "closed"); }
     catch (error) { reportStorageError(error); }
-    listeners.forEach((listener) => listener());
-    requestAnimationFrame(() => {
-      if (!next?.isConnected) return;
-      if (!next.hasAttribute("tabindex") && next.matches("h1, h2")) {
-        next.setAttribute("tabindex", "-1");
-        next.addEventListener("blur", () => next.removeAttribute("tabindex"), { once: true });
-      }
-      next.focus({ preventScroll: true });
-    });
+    notify();
   }
-  if (closed) return null;
-  const closeButton = <button type="button" onClick={dismiss}
-    className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-border bg-background px-4 py-2 text-sm text-ink hover:border-accent hover:text-accent"
-    aria-label={`Fermer l’annonce : ${title}`}>
-    <IconClose className="h-5 w-5 shrink-0" /><span>Fermer l’annonce</span>
-  </button>;
-  return <div ref={root} role="region" aria-label={`Annonce : ${title}`} onKeyDown={(event) => {
-    if (event.key !== "Escape" || event.defaultPrevented ||
-      (event.target instanceof Element && event.target.closest("dialog"))) return;
-    event.preventDefault();
-    event.stopPropagation();
-    dismiss();
-  }}>
-    <div className="flex justify-end px-5 pt-4 sm:px-6 lg:px-8">{closeButton}</div>
-    {children}
-    <div className="flex justify-end border-b border-border px-5 pb-4 sm:px-6 lg:px-8">{closeButton}</div>
-  </div>;
+  return <dialog ref={dialogRef} aria-modal="true" aria-labelledby={titleId}
+    onKeyDown={(event) => {
+      if (event.key !== "Escape" || event.defaultPrevented ||
+        !(event.target instanceof Element) || event.target.closest("dialog") !== event.currentTarget) return;
+      event.preventDefault(); event.stopPropagation(); dismiss();
+    }}
+    onCancel={(event) => {
+      if (event.target !== event.currentTarget) return;
+      event.preventDefault(); event.stopPropagation(); dismiss();
+    }}
+    onClick={(event) => { if (event.target === event.currentTarget) dismiss(); }}
+    className="fixed inset-0 m-0 h-[100dvh] max-h-none w-screen max-w-none border-0 bg-transparent p-3 text-ink backdrop:bg-black/75 sm:p-6">
+    <div className="flex min-h-full items-center justify-center"
+      onClick={(event) => { if (event.target === event.currentTarget) dismiss(); }}>
+      <div className={`flex max-h-[calc(100dvh-1.5rem)] w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-2xl sm:max-h-[calc(100dvh-3rem)] ${widthClass}`}>
+        <div className="flex shrink-0 items-center justify-between gap-4 border-b border-border bg-background px-4 py-3">
+          <h2 id={titleId} className="min-w-0 break-words text-lg">{title}</h2>
+          <button type="button" onClick={dismiss}
+            className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg border border-border bg-background px-3 py-2 text-sm text-ink hover:border-accent hover:text-accent"
+            aria-label={`Fermer l’annonce : ${title}`}>
+            <IconClose className="h-5 w-5 shrink-0" /><span>Fermer</span>
+          </button>
+        </div>
+        <div className="min-h-0 overflow-y-auto overscroll-contain">{children}</div>
+      </div>
+    </div>
+  </dialog>;
 }

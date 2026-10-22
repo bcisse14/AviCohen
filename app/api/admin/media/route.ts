@@ -53,8 +53,8 @@ export async function DELETE(request: Request) {
     requireSameOrigin(request);
     requireAdmin();
     const body = z.object({ id: z.string().uuid() }).parse(await readJson(request, 4096));
-    // Keep the file available for existing publications and historical versions.
-    await repository.removeMedia(body.id);
-    return NextResponse.json({ ok: true });
+    if (!process.env.BLOB_READ_WRITE_TOKEN) throw new CmsError(503, "Configurez BLOB_READ_WRITE_TOKEN pour supprimer les fichiers importés.");
+    const revision = await repository.removeMedia(body.id, async (src) => { await del(src); });
+    return NextResponse.json({ ok: true, ...revision });
   } catch (error) { return apiError(error); }
 }

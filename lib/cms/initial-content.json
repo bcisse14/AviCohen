@@ -555,7 +555,7 @@
             {
               "src": "/images/implantologie_1.webp",
               "alt": "Avant et après réhabilitation implantaire du sourire",
-              "caption": "Cas clinique 1 — Restauration de la fonction et de l'esthétique avec un résultat stable et naturel.",
+              "caption": "Cas clinique 1 : Restauration de la fonction et de l'esthétique avec un résultat stable et naturel.",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"
@@ -563,7 +563,7 @@
             {
               "src": "/images/implantologie_2.webp",
               "alt": "Résultat de traitement implantaire avec intégration esthétique",
-              "caption": "Cas clinique 2 — Rééquilibrage du sourire et amélioration de l'alignement prothétique après traitement.",
+              "caption": "Cas clinique 2 : Rééquilibrage du sourire et amélioration de l'alignement prothétique après traitement.",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"
@@ -731,7 +731,7 @@
             {
               "src": "/images/avant_1.jpg",
               "alt": "Sourire avant traitement esthétique, cas 1",
-              "caption": "Cas 1 — Avant",
+              "caption": "Cas 1 : Avant",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"
@@ -739,7 +739,7 @@
             {
               "src": "/images/apres_1.jpg",
               "alt": "Sourire après traitement esthétique, cas 1",
-              "caption": "Cas 1 — Après",
+              "caption": "Cas 1 : Après",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"
@@ -747,7 +747,7 @@
             {
               "src": "/images/avant_2.jpg",
               "alt": "Sourire avant traitement esthétique, cas 2",
-              "caption": "Cas 2 — Avant",
+              "caption": "Cas 2 : Avant",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"
@@ -755,7 +755,7 @@
             {
               "src": "/images/apres_2.jpg",
               "alt": "Sourire après traitement esthétique, cas 2",
-              "caption": "Cas 2 — Après",
+              "caption": "Cas 2 : Après",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"
@@ -763,7 +763,7 @@
             {
               "src": "/images/avant_3.png",
               "alt": "Restauration dentaire avant traitement, cas 3",
-              "caption": "Cas 3 — Avant",
+              "caption": "Cas 3 : Avant",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"
@@ -771,7 +771,7 @@
             {
               "src": "/images/apres_3.png",
               "alt": "Restauration dentaire après traitement, cas 3",
-              "caption": "Cas 3 — Après",
+              "caption": "Cas 3 : Après",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"

@@ -20,6 +20,10 @@ export const schemaSql = [
     data jsonb NOT NULL,
     created_at timestamptz NOT NULL DEFAULT now()
   )`,
+  `CREATE TABLE IF NOT EXISTS cms_deleted_media (
+    src text PRIMARY KEY,
+    created_at timestamptz NOT NULL DEFAULT now()
+  )`,
   `CREATE TABLE IF NOT EXISTS cms_login_attempts (
     key text PRIMARY KEY,
     attempts integer NOT NULL,

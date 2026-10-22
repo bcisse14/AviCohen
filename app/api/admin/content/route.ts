@@ -4,6 +4,7 @@ import { requireAdmin } from "@/lib/cms/auth";
 import { apiError, readJson, requireSameOrigin } from "@/lib/cms/http";
 import { documentSchema } from "@/lib/cms/schema";
 import { repository } from "@/lib/cms/repository";
+import { publicationTargetSchema } from "@/lib/cms/publication";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -18,7 +19,7 @@ export async function PUT(request: Request) {
     requireSameOrigin(request);
     requireAdmin();
     const body = z.object({
-      document: documentSchema, revision: z.number().int().positive(), publish: z.boolean(),
+      document: documentSchema, revision: z.number().int().positive(), publish: z.union([z.boolean(), publicationTargetSchema]),
     }).parse(await readJson(request));
     return NextResponse.json(await repository.save(body.document, body.revision, body.publish), {
       headers: { "Cache-Control": "no-store" },

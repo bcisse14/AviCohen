@@ -70,7 +70,10 @@ export function Figure({
       </button>
 
       <dialog ref={dialogRef} aria-modal="true" aria-labelledby={titleId}
-        onCancel={() => setIsOpen(false)}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") { event.preventDefault(); event.stopPropagation(); setIsOpen(false); }
+        }}
+        onCancel={(event) => { event.preventDefault(); event.stopPropagation(); setIsOpen(false); }}
         onClose={() => { setIsOpen(false); triggerRef.current?.focus({ preventScroll: true }); }}
         onClick={(event) => { if (event.target === event.currentTarget) setIsOpen(false); }}
         className="fixed inset-0 m-0 h-[100dvh] max-h-none w-screen max-w-none border-0 bg-black/90 p-4 text-white backdrop:bg-black/70">

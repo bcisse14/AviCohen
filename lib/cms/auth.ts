@@ -8,12 +8,17 @@ const scryptAsync = promisify(scrypt);
 export const sessionCookie = "cohen_cms_session";
 export const sessionSeconds = 8 * 60 * 60;
 const hashPattern = /^scrypt:([a-f0-9]{32}):([a-f0-9]{128})$/;
+function adminIdentifier() {
+  return (process.env.CMS_ADMIN_USERNAME || process.env.CMS_ADMIN_EMAIL)?.trim().toLowerCase();
+}
 export function configurationIssues() {
-  const issues = ["DATABASE_URL", "CMS_ADMIN_EMAIL", "CMS_ADMIN_PASSWORD_HASH", "CMS_SESSION_SECRET"]
+  const issues = ["DATABASE_URL", "CMS_ADMIN_PASSWORD_HASH", "CMS_SESSION_SECRET"]
     .filter((key) => !process.env[key]);
+  if (!adminIdentifier()) issues.push("CMS_ADMIN_USERNAME (ou CMS_ADMIN_EMAIL)");
+  if (process.env.CMS_ADMIN_USERNAME && !/^[a-zA-Z0-9._-]{3,64}$/.test(process.env.CMS_ADMIN_USERNAME)) issues.push("CMS_ADMIN_USERNAME (3 à 64 lettres, chiffres, points, tirets ou tirets bas)");
   if (process.env.CMS_SESSION_SECRET && process.env.CMS_SESSION_SECRET.length < 48) issues.push("CMS_SESSION_SECRET (48 caractères minimum)");
   if (process.env.CMS_ADMIN_PASSWORD_HASH && !hashPattern.test(process.env.CMS_ADMIN_PASSWORD_HASH)) issues.push("CMS_ADMIN_PASSWORD_HASH (empreinte scrypt invalide)");
-  if (process.env.CMS_ADMIN_EMAIL && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(process.env.CMS_ADMIN_EMAIL)) issues.push("CMS_ADMIN_EMAIL (adresse e-mail invalide)");
+  if (!process.env.CMS_ADMIN_USERNAME && process.env.CMS_ADMIN_EMAIL && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(process.env.CMS_ADMIN_EMAIL)) issues.push("CMS_ADMIN_EMAIL (adresse e-mail invalide)");
   return issues;
 }
 function secret(): string {
@@ -22,7 +27,7 @@ function secret(): string {
   return value;
 }
 function credentialFingerprint() {
-  return createHash("sha256").update(`${process.env.CMS_ADMIN_EMAIL}:${process.env.CMS_ADMIN_PASSWORD_HASH}`).digest("hex");
+  return createHash("sha256").update(`${adminIdentifier()}:${process.env.CMS_ADMIN_PASSWORD_HASH}`).digest("hex");
 }
 export function signSession(now = Date.now()) {
   const payload = Buffer.from(JSON.stringify({
@@ -52,7 +57,7 @@ export function isAuthenticated() {
 export function requireAdmin() {
   if (!isAuthenticated()) throw new CmsError(401, "Votre session a expiré. Reconnectez-vous ; vos modifications restent dans cette fenêtre.");
 }
-export async function checkCredentials(email: string, password: string) {
+export async function checkCredentials(identifier: string, password: string) {
   if (configurationIssues().length) throw new CmsError(503, "L'administration n'est pas encore correctement configurée.");
   secret();
   const configuredHash = process.env.CMS_ADMIN_PASSWORD_HASH || "";
@@ -70,6 +75,6 @@ export async function checkCredentials(email: string, password: string) {
   if (!rows[0] || rows[0].attempts > 30) throw new CmsError(429, "Trop de tentatives de connexion. Réessayez dans 15 minutes.");
   const actual = await scryptAsync(password, match[1], 64) as Buffer;
   const validPassword = timingSafeEqual(actual, Buffer.from(match[2], "hex"));
-  const validEmail = email.trim().toLowerCase() === process.env.CMS_ADMIN_EMAIL?.trim().toLowerCase();
-  if (!validPassword || !validEmail) throw new CmsError(401, "Identifiants incorrects.");
+  const validIdentifier = identifier.trim().toLowerCase() === adminIdentifier();
+  if (!validPassword || !validIdentifier) throw new CmsError(401, "Identifiants incorrects.");
 }

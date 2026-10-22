@@ -14,7 +14,7 @@ export default async function PreviewPage({ params }: { params: { id: string } }
   const page = draft.pages.find((p) => p.id === params.id);
   if (!page) notFound();
   return <>
-    <div className="border-b border-accent bg-surface p-4 text-center">Prévisualisation privée du brouillon enregistré — le site public est inchangé. <Link className="ml-4 text-accent" href="/admin">Retour à l’administration</Link></div>
+    <div className="border-b border-accent bg-surface p-4 text-center">Prévisualisation privée du brouillon enregistré : le site public est inchangé. <Link className="ml-4 text-accent" href="/admin">Retour à l’administration</Link></div>
     <PublicShell settings={draft.settings} preview><Blocks blocks={page.blocks} settings={draft.settings} scope={`preview:${page.id}`} /></PublicShell>
   </>;
 }

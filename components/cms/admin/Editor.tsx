@@ -9,6 +9,7 @@ import { BlockEditor } from "./BlockEditor";
 import { Check, Field, ListEditor, Select } from "./Fields";
 import { cmsRequest, MediaDialog, MediaLibrary } from "./MediaLibrary";
 import { SettingsEditor } from "./SettingsEditor";
+import type { PublicationTarget } from "@/lib/cms/publication";
 
 type Tab = "pages" | "settings" | "announcements" | "media" | "history";
 type Version = { id: string; reason: string; createdAt: string };
@@ -48,6 +49,13 @@ export function Editor({ initialState, originalMedia, uploadedMedia, uploadsEnab
   const dirty = useMemo(() => JSON.stringify(document) !== JSON.stringify(state.draft), [document, state.draft]);
   const page = document.pages.find((p) => p.id === pageId);
   const chooseImage = (choose: (image: CmsImage) => void) => setSelection({ choose });
+  const currentContent = useMemo(() => JSON.stringify(document), [document]);
+  const isImageUsed = (src: string) => currentContent.includes(src);
+  function updateMedia(items: Media[], revision?: { previousRevision: number; revision: number }) {
+    setMedia(items);
+    if (revision) setState((current) => current.revision === revision.previousRevision
+      ? { ...current, revision: revision.revision } : current);
+  }
   function change(next: CmsDocument) {
     past.current = [...past.current.slice(-29), document];
     future.current = [];
@@ -69,8 +77,16 @@ export function Editor({ initialState, originalMedia, uploadedMedia, uploadsEnab
     return () => { active = false; };
   }, [tab, state.revision]);
 
-  async function save(publish: boolean) {
-    if (publish && !window.confirm("Publier toutes les pages, les réglages et les annonces de ce brouillon sur le site public ?")) return;
+  async function save(publish: boolean | PublicationTarget) {
+    const removal = typeof publish === "object" && (publish.type === "remove-announcement" || publish.type === "remove-all-announcements");
+    const confirmation = typeof publish === "object"
+      ? publish.type === "remove-all-announcements" ? "Retirer immédiatement toutes les annonces du site et du brouillon, y compris les annonces dans les pages ? Les autres contenus ne seront pas publiés. L’historique permettra de récupérer le brouillon précédent."
+        : publish.type === "remove-announcement" ? "Retirer immédiatement cette annonce du site et du brouillon ? Les autres contenus ne seront pas publiés."
+        : publish.type === "settings" ? "Publier uniquement les réglages du site, sans publier les annonces ni les pages ? Les contenus partagés (équipe, coordonnées…) seront mis à jour sur tout le site."
+        : publish.type === "page" ? "Publier cette page entière, avec tous ses blocs et ses informations ? Les autres pages, réglages et annonces globales resteront en brouillon."
+          : "Publier uniquement cet élément ? Les autres modifications seront enregistrées en brouillon, sans être mises en ligne."
+      : "Publier toutes les pages, les réglages et les annonces de ce brouillon sur le site public ?";
+    if (publish !== false && !window.confirm(confirmation)) return;
     setBusy(true); setError(""); setMessage("");
     try {
       const parsed = documentSchema.safeParse(document);
@@ -87,7 +103,9 @@ export function Editor({ initialState, originalMedia, uploadedMedia, uploadsEnab
         body: JSON.stringify({ document: parsed.data, revision: state.revision, publish }),
       });
       setState(next); setDocument(next.draft);
-      setMessage(publish ? "Publication confirmée. Le site public affiche désormais cette version." : "Brouillon enregistré. Le site public n’a pas changé.");
+      setMessage(removal ? "Retrait confirmé sur le site et dans le brouillon. Les autres modifications restent privées. Actualisez les pages publiques déjà ouvertes pour voir le résultat."
+        : typeof publish === "object" ? "Publication individuelle confirmée. Seule la sélection a été mise en ligne ; les autres modifications sont enregistrées en brouillon."
+        : publish ? "Publication confirmée. Le site public affiche désormais cette version." : "Brouillon enregistré. Le site public n’a pas changé.");
     } catch (cause) { setError(cause instanceof Error ? cause.message : "Enregistrement impossible."); }
     finally { setBusy(false); }
   }
@@ -154,6 +172,7 @@ export function Editor({ initialState, originalMedia, uploadedMedia, uploadsEnab
           {page && <div key={page.id} className="min-w-0 space-y-6">
             <section className="cms-panel space-y-4">
               <div className="flex flex-wrap items-center gap-3"><h2 className="mr-auto text-2xl">{page.title}</h2>
+                <button type="button" className="btn-primary" onClick={() => save({ type: "page", pageId: page.id })}>Publier uniquement cette page</button>
                 <a className={`cms-action ${dirty ? "opacity-40" : ""}`} href={`/preview/${page.id}`} target="_blank" rel="noopener noreferrer" aria-disabled={dirty} onClick={(e) => { if (dirty) { e.preventDefault(); setError("Enregistrez le brouillon avant de le prévisualiser."); } }}>Prévisualiser le brouillon</a>
                 <button type="button" className="cms-action" disabled={document.pages.length >= 100} onClick={() => {
                   const copy: CmsPage = { ...page, id: crypto.randomUUID(), path: `${page.path === "/" ? "/accueil" : page.path}-copie-${crypto.randomUUID().slice(0, 6)}`, title: `${page.title} (copie)`, blocks: page.blocks.map((b) => ({ ...b, id: crypto.randomUUID() })) };
@@ -176,28 +195,53 @@ export function Editor({ initialState, originalMedia, uploadedMedia, uploadsEnab
               <div className="flex flex-wrap items-center gap-3"><button type="button" className="cms-action" onClick={() => chooseImage((image) => updatePage({ ...page, ogImage: image.src }))}>Choisir l’image de partage</button>
                 {page.ogImage && <><span className="max-w-lg truncate text-xs text-muted">{page.ogImage}</span><button type="button" className="cms-action" onClick={() => updatePage({ ...page, ogImage: "" })}>Retirer</button></>}
               </div>
+              {page.ogImage && (
+                // The selected sharing image is shown directly, including external library images.
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={page.ogImage} alt={`Aperçu de l’image de partage : ${page.title}`} loading="lazy"
+                  className="max-h-48 w-full rounded-lg border border-border bg-background object-contain" />
+              )}
             </section>
             <section className="cms-panel">
               <h2 className="mb-4 text-2xl">Contenu de la page</h2>
               <ListEditor label="Blocs" items={page.blocks} onChange={(blocks) => updatePage({ ...page, blocks })} max={80} create={() => newBlock(blockType)}
+                removeLabel={(block) => block.type === "announcement" ? "Retirer l’annonce du site" : "Retirer"}
+                onRemove={(block, index) => {
+                  if (block.type === "announcement") { void save({ type: "remove-announcement", pageId: page.id, id: block.id }); return; }
+                  if (window.confirm("Retirer ce bloc du brouillon ? Publiez ensuite la page pour appliquer ce retrait au site.")) {
+                    updatePage({ ...page, blocks: page.blocks.filter((_, i) => i !== index) });
+                  }
+                }}
                 render={(block, update, index) => <details open={page.blocks.length === 1}>
-                  <summary className="cursor-pointer text-base font-medium">{index + 1}. {blockLabels[block.type]} — {block.title || "Sans titre"}{!block.visible && " (masqué)"}</summary>
+                  <summary className="cursor-pointer text-base font-medium">{index + 1}. {blockLabels[block.type]} : {block.title || "Sans titre"}{!block.visible && " (masqué)"}</summary>
                   <div className="mt-5 space-y-4"><button type="button" className="cms-action" disabled={page.blocks.length >= 80} onClick={() => updatePage({ ...page, blocks: [...page.blocks.slice(0, index + 1), { ...block, id: crypto.randomUUID() }, ...page.blocks.slice(index + 1)] })}>Dupliquer le bloc</button>
-                    <BlockEditor block={block} onChange={update} chooseImage={chooseImage} />
+                    <BlockEditor block={block} onChange={update} chooseImage={chooseImage} publication={{ busy, dirty, save, target: { type: "block", pageId: page.id, id: block.id } }} />
                   </div>
                 </details>} />
               <div className="mt-5 max-w-md"><Select label="Type du prochain bloc ajouté" value={blockType} onChange={setBlockType} options={blockTypes.map((value) => ({ value, label: blockLabels[value] }))} /></div>
             </section>
           </div>}
         </div>}
-        {tab === "settings" && <SettingsEditor settings={document.settings} onChange={(settings) => change({ ...document, settings })} chooseImage={chooseImage} />}
+        {tab === "settings" && <div className="space-y-6">
+          <SettingsEditor settings={document.settings} onChange={(settings) => change({ ...document, settings })} chooseImage={chooseImage} />
+          <section className="cms-panel space-y-3">
+            <p className="text-sm text-muted">Publie les réglages partagés sur tout le site, sans publier les pages ni les annonces globales. Les liens doivent pointer vers des pages déjà en ligne.</p>
+            <button type="button" className="btn-primary" onClick={() => save({ type: "settings" })}>Publier uniquement les réglages</button>
+          </section>
+        </div>}
         {tab === "announcements" && <section className="cms-panel space-y-5">
           <h1 className="text-3xl">Annonces sur tout le site</h1>
-          <p className="text-sm text-muted">Affichées sous le menu, sur toutes les pages. Pour une annonce sur une seule page, ajoutez un bloc « Annonce » dans cette page. Texte long, liens, photos, dates et largeur se règlent ci-dessous.</p>
+          <div className="space-y-3 rounded-xl border border-border p-4">
+            <p className="text-sm text-muted">Le retrait supprime immédiatement les annonces de la version en ligne et du brouillon, sans publier les autres modifications. Le bouton ci-dessous retire aussi celles qui ne sont plus dans le brouillon et les annonces présentes dans les pages.</p>
+            <button type="button" className="cms-action text-red-300" onClick={() => save({ type: "remove-all-announcements" })}>Retirer toutes les annonces du site</button>
+          </div>
+          <p className="text-sm text-muted">Affichées dans une fenêtre au premier plan, sur toutes les pages, une par une et avec un seul bouton Fermer. Pour une annonce sur une seule page, ajoutez un bloc « Annonce » dans cette page. Texte long, liens, photos, dates et largeur se règlent ci-dessous.</p>
           <ListEditor<Block> label="Annonces" items={document.settings.announcements} onChange={(announcements) => change({ ...document, settings: { ...document.settings, announcements } })} max={20} create={() => ({ ...newBlock("announcement"), title: "Information du cabinet", background: "accent" })}
-            render={(block, update) => <BlockEditor block={block} onChange={update} chooseImage={chooseImage} fixedType />} />
+            removeLabel={() => "Retirer l’annonce du site"}
+            onRemove={(block) => { void save({ type: "remove-announcement", id: block.id }); }}
+            render={(block, update) => <BlockEditor block={block} onChange={update} chooseImage={chooseImage} fixedType publication={{ busy, dirty, save, target: { type: "announcement", id: block.id } }} />} />
         </section>}
-        {tab === "media" && <section className="cms-panel space-y-6"><h1 className="text-3xl">Médiathèque</h1><MediaLibrary media={media} onMediaChange={setMedia} uploadsEnabled={uploadsEnabled} /></section>}
+        {tab === "media" && <section className="cms-panel space-y-6"><h1 className="text-3xl">Médiathèque</h1><MediaLibrary media={media} onMediaChange={updateMedia} uploadsEnabled={uploadsEnabled} isImageUsed={isImageUsed} /></section>}
         {tab === "history" && <section className="cms-panel space-y-6">
           <h1 className="text-3xl">Historique et sauvegarde</h1>
           <p className="text-sm text-muted">Les 30 versions précédant les derniers enregistrements sont conservées. Restaurer crée un brouillon ; cela ne modifie jamais directement le site public. Les fichiers image restent disponibles pour les anciennes versions.</p>
@@ -233,6 +277,6 @@ export function Editor({ initialState, originalMedia, uploadedMedia, uploadsEnab
         </section>}
       </fieldset>
     </div>
-    {selection && <MediaDialog media={media} onMediaChange={setMedia} select={selection.choose} close={() => setSelection(null)} uploadsEnabled={uploadsEnabled} />}
+    {selection && <MediaDialog media={media} onMediaChange={updateMedia} select={selection.choose} close={() => setSelection(null)} uploadsEnabled={uploadsEnabled} isImageUsed={isImageUsed} />}
   </div>;
 }

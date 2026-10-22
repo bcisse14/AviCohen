@@ -61,9 +61,11 @@ export function moveItem<T>(items: T[], from: number, to: number): T[] {
   copy.splice(to, 0, item);
   return copy;
 }
-export function ListEditor<T>({ label, items, onChange, create, render, max = 100 }: {
+export function ListEditor<T>({ label, items, onChange, create, render, max = 100, onRemove, removeLabel }: {
   label: string; items: T[]; onChange: (items: T[]) => void; create: () => T;
   render: (item: T, update: (item: T) => void, index: number) => ReactNode; max?: number;
+  onRemove?: (item: T, index: number) => void;
+  removeLabel?: (item: T) => string;
 }) {
   const dragging = useRef<number | null>(null);
   return <div className="min-w-0 space-y-4">
@@ -84,8 +86,9 @@ export function ListEditor<T>({ label, items, onChange, create, render, max = 10
         <button type="button" className="cms-action" disabled={index === 0} onClick={() => onChange(moveItem(items, index, index - 1))} aria-label={`Monter ${label} ${index + 1}`}>↑</button>
         <button type="button" className="cms-action" disabled={index === items.length - 1} onClick={() => onChange(moveItem(items, index, index + 1))} aria-label={`Descendre ${label} ${index + 1}`}>↓</button>
         <button type="button" className="cms-action ml-auto text-red-300" onClick={() => {
+          if (onRemove) { onRemove(item, index); return; }
           if (window.confirm(`Retirer cet élément de « ${label} » du brouillon ?`)) onChange(items.filter((_, i) => i !== index));
-        }}>Retirer</button>
+        }}>{removeLabel ? removeLabel(item) : "Retirer"}</button>
       </div>
       {render(item, (next) => onChange(items.map((value, i) => i === index ? next : value)), index)}
     </div>)}

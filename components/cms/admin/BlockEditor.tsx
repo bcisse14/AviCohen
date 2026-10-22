@@ -3,6 +3,7 @@
 import { blockLabels, blockTypes, type Block, type CmsImage } from "@/lib/cms/schema";
 import { Check, Field, ListEditor, Select, TextEditor } from "./Fields";
 import { ImageEditor } from "./MediaLibrary";
+import type { PublicationTarget } from "@/lib/cms/publication";
 
 export type ChooseImage = (callback: (image: CmsImage) => void) => void;
 export function ButtonsEditor({ buttons, onChange }: { buttons: Block["buttons"]; onChange: (buttons: Block["buttons"]) => void }) {
@@ -17,14 +18,15 @@ function dateInput(value: string) {
   const date = new Date(value);
   return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
 }
-export function BlockEditor({ block, onChange, chooseImage, fixedType = false }: {
+export function BlockEditor({ block, onChange, chooseImage, fixedType = false, publication }: {
   block: Block; onChange: (block: Block) => void; chooseImage: ChooseImage; fixedType?: boolean;
+  publication?: { busy: boolean; dirty: boolean; save: (publish: boolean | PublicationTarget) => Promise<void>; target: PublicationTarget };
 }) {
   const hasImages = ["split", "image", "gallery", "announcement"].includes(block.type);
   return <div className="min-w-0 space-y-5">
     {block.type === "announcement" && <p className="rounded-xl border border-border p-4 text-sm text-muted">
-      Cette annonce est toujours fermable par le visiteur (boutons en haut et en bas, ou Échap lorsqu’elle a le focus).
-      Sa fermeture est mémorisée dans cet onglet pendant la visite, sans bloquer la navigation.
+      Cette annonce s’ouvre dans une fenêtre au premier plan, avec un seul bouton Fermer toujours accessible, la touche Échap et le clic sur le fond.
+      Les annonces s’affichent une par une. Sa fermeture est mémorisée dans cet onglet pendant la visite.
       Une modification de l’annonce permet de l’afficher à nouveau. La prévisualisation utilise une mémoire distincte du site public.
     </p>}
     <div className="grid gap-4 sm:grid-cols-2">
@@ -67,5 +69,15 @@ export function BlockEditor({ block, onChange, chooseImage, fixedType = false }:
     <ButtonsEditor buttons={block.buttons} onChange={(buttons) => onChange({ ...block, buttons })} />
     <Check label="Afficher aussi les liens de rendez-vous de l'équipe (synchronisés avec les réglages)" value={block.showAppointments} onChange={(showAppointments) => onChange({ ...block, showAppointments })} />
     <p className="text-xs text-muted">Sur mobile, les colonnes passent automatiquement en une seule colonne. La hauteur n’est pas limitée.</p>
+    {publication && <section aria-label={block.type === "announcement" ? "Publication de l’annonce" : "Publication du bloc"} className="rounded-xl border border-accent p-4 space-y-3">
+      <h3 className="text-xl">{block.type === "announcement" ? "Mettre l’annonce en ligne" : "Mettre le bloc en ligne"}</h3>
+      <p className="text-sm text-muted">La publication individuelle met uniquement cet élément en ligne. Les autres modifications sont enregistrées en brouillon, sans être publiées. Les coordonnées et contenus partagés utilisent les réglages déjà en ligne.</p>
+      {!block.visible && <p className="text-sm text-accent">{block.type === "announcement" ? "Cette annonce est masquée." : "Ce bloc est masqué."} Cochez « Bloc visible » pour permettre son affichage après publication.</p>}
+      {(block.startsAt || block.endsAt) && <p className="text-sm text-muted">Les dates de programmation restent prioritaires : cet élément ne s’affichera que pendant la période définie.</p>}
+      <div className="flex flex-wrap gap-3">
+        <button type="button" className="cms-action" disabled={publication.busy || !publication.dirty} onClick={() => publication.save(false)}>Enregistrer le brouillon</button>
+        <button type="button" className="btn-primary" disabled={publication.busy} onClick={() => publication.save(publication.target)}>{publication.busy ? "Traitement…" : block.type === "announcement" ? "Publier uniquement cette annonce" : "Publier uniquement ce bloc"}</button>
+      </div>
+    </section>}
   </div>;
 }

@@ -62,7 +62,7 @@ export function ContentBlock({ block, settings, heading = "h2", priority = false
       {block.buttons.map((button, index) => <Link className={index ? "btn-secondary" : "btn-primary"} key={index} href={button.href}>{button.label}</Link>)}
     </div>}
     {block.showAppointments && <div className={`mt-5 flex flex-wrap gap-3 ${block.align === "center" ? "justify-center" : ""}`}>
-      {settings.team.map((member) => <a className="btn-secondary" key={member.id} href={member.doctolibUrl} target="_blank" rel="noopener noreferrer">Doctolib — {member.name}</a>)}
+      {settings.team.map((member) => <a className="btn-secondary" key={member.id} href={member.doctolibUrl} target="_blank" rel="noopener noreferrer">Doctolib : {member.name}</a>)}
     </div>}
   </>;
   const content = <section id={`bloc-${block.id}`} className={`border-b border-border ${block.background === "surface" ? "bg-surface" : block.background === "accent" ? "cms-accent-panel" : ""}`}>
@@ -108,7 +108,7 @@ export function ContentBlock({ block, settings, heading = "h2", priority = false
   </section>;
   if (block.type !== "announcement") return content;
   return <DismissibleAnnouncement storageKey={announcementKey(block, settings, dismissalScope)}
-    title={interpolate(block.title, settings) || "Information du cabinet"}>
+    title={interpolate(block.title, settings) || "Information du cabinet"} widthClass={widths[block.width]}>
     {content}
   </DismissibleAnnouncement>;
 }

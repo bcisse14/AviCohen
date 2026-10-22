@@ -10,11 +10,94 @@ import { Header } from "../../components/Header";
 import { PublicShell } from "../../components/cms/PublicShell";
 import { announcementKey } from "../../lib/cms/announcement";
 import { Figure } from "../../components/Figure";
+import { Login } from "../../components/cms/admin/Login";
+import { BlockEditor } from "../../components/cms/admin/BlockEditor";
+import type { PublicationTarget } from "../../lib/cms/publication";
+import { Editor } from "../../components/cms/admin/Editor";
+import { ListEditor } from "../../components/cms/admin/Fields";
+import { ImageEditor, MediaLibrary } from "../../components/cms/admin/MediaLibrary";
 
 // The tsx runner follows the repository's preserved JSX mode.
 Object.assign(globalThis, { React });
 
-test("les annonces longues ne sont ni tronquées ni enfermées dans une hauteur fixe", () => {
+test("les images sélectionnées sont visibles et les prérequis d’import sont explicites", () => {
+  const image = { src: "/images/cabinet-salle-soin-01.jpg", alt: "Salle de soin", caption: "", fit: "contain" as const, position: "center" as const, ratio: "landscape" as const };
+  const html = renderToStaticMarkup(React.createElement(ImageEditor, { image, onChange: () => {}, onChoose: () => {} }));
+  assert.ok(html.includes(`src="${image.src}"`));
+  assert.ok(html.includes('alt="Salle de soin"'));
+  const library = renderToStaticMarkup(React.createElement(MediaLibrary, { media: [], onMediaChange: () => {}, uploadsEnabled: true }));
+  assert.match(library, /<button type="submit" class="btn-primary">Importer l&#x27;image<\/button>/);
+  assert.ok(library.includes("accessibilité (obligatoire)"));
+  assert.ok(library.includes("Décrivez brièvement ce que montre la photo"));
+  const draft = structuredClone(initialDocument);
+  draft.pages[0]!.ogImage = image.src;
+  const editor = renderToStaticMarkup(React.createElement(Editor, {
+    initialState: { draft, revision: 1, updatedAt: "2026-10-22T10:00:00Z", publishedAt: "2026-10-22T10:00:00Z" },
+    originalMedia: [], uploadedMedia: [], uploadsEnabled: false,
+  }));
+  assert.ok(editor.includes('alt="Aperçu de l’image de partage : Accueil"'));
+});
+
+test("la médiathèque propose une suppression définitive uniquement pour les fichiers importés", () => {
+  const base = { src: "https://test.public.blob.vercel-storage.com/test.webp", alt: "Photo", caption: "", fit: "contain" as const, position: "center" as const, ratio: "landscape" as const, name: "test.webp", width: 100, height: 100, uploadedAt: "" };
+  const html = renderToStaticMarkup(React.createElement(MediaLibrary, {
+    media: [{ ...base, id: "imported" }, { ...base, id: "original-1", src: "/images/cabinet-salle-soin-01.jpg" }],
+    onMediaChange: () => {}, uploadsEnabled: true,
+  }));
+  assert.equal((html.match(/>Supprimer définitivement<\/button>/g) || []).length, 1);
+  assert.ok(html.includes("suppression du fichier indisponible dans le CMS"));
+});
+
+test("le retrait des annonces est explicitement distingué du retrait des blocs ordinaires", () => {
+  const draft = structuredClone(initialDocument);
+  draft.pages[0]!.blocks.push({ ...newBlock("announcement"), title: "À retirer" });
+  const html = renderToStaticMarkup(React.createElement(Editor, {
+    initialState: { draft, revision: 1, updatedAt: "2026-10-22T10:00:00Z", publishedAt: "2026-10-22T10:00:00Z" },
+    originalMedia: [], uploadedMedia: [], uploadsEnabled: false,
+  }));
+  assert.ok(html.includes("Retirer l’annonce du site"));
+  const generic = renderToStaticMarkup(React.createElement(ListEditor<string>, {
+    label: "Exemple", items: ["contenu"], onChange: () => {}, create: () => "", render: (item) => item,
+  }));
+  assert.ok(generic.includes(">Retirer</button>"));
+});
+
+test("les annonces disposent de commandes de publication explicites et signalent leur visibilité", () => {
+  const block = { ...newBlock("announcement"), visible: false, startsAt: "2030-01-01T10:00:00.000Z" };
+  const props = {
+    block, onChange: () => {}, chooseImage: () => {},
+    publication: { busy: false, dirty: true, save: async () => {}, target: { type: "announcement", id: block.id } satisfies PublicationTarget },
+  };
+  for (const fixedType of [true, false]) {
+    const html = renderToStaticMarkup(React.createElement(BlockEditor, { ...props, fixedType }));
+    assert.ok(html.includes('aria-label="Publication de l’annonce"'));
+    assert.ok(html.includes("Publier uniquement cette annonce"));
+    assert.ok(html.includes("Enregistrer le brouillon"));
+    assert.ok(html.includes("Les autres modifications sont enregistrées en brouillon, sans être publiées"));
+    assert.ok(html.includes("Cette annonce est masquée"));
+    assert.ok(html.includes("Les dates de programmation restent prioritaires"));
+    assert.ok(!html.includes("disabled="));
+  }
+  const busy = renderToStaticMarkup(React.createElement(BlockEditor, {
+    ...props, publication: { ...props.publication, busy: true },
+  }));
+  assert.match(busy, /<button[^>]*disabled=""[^>]*>Traitement…<\/button>/);
+  const ordinary = renderToStaticMarkup(React.createElement(BlockEditor, {
+    ...props, block: newBlock("text"), publication: { ...props.publication, target: { type: "block", pageId: "page", id: "block" } },
+  }));
+  assert.ok(ordinary.includes('aria-label="Publication du bloc"'));
+  assert.ok(ordinary.includes("Publier uniquement ce bloc"));
+});
+
+test("le formulaire de connexion accepte un identifiant sans imposer une adresse e-mail", () => {
+  const html = renderToStaticMarkup(React.createElement(Login));
+  assert.ok(html.includes('name="identifier"'));
+  assert.ok(html.includes('type="text"'));
+  assert.ok(html.includes('autoComplete="username"'));
+  assert.ok(!html.includes('type="email"'));
+});
+
+test("les annonces longues restent complètes dans une fenêtre défilante avec une seule fermeture", () => {
   const body = "Annonce du cabinet. ".repeat(1200);
   const html = renderToStaticMarkup(React.createElement(ContentBlock, {
     block: { ...newBlock("announcement"), width: "full", body, title: "Informations" },
@@ -23,14 +106,17 @@ test("les annonces longues ne sont ni tronquées ni enfermées dans une hauteur 
   assert.ok(html.includes("max-w-none"));
   assert.ok(html.includes(body.trim()));
   assert.ok(!html.includes("line-clamp"));
-  assert.ok(!html.includes("overflow-hidden"));
-  assert.ok(!html.includes("max-h-"));
+  assert.ok(html.includes("overflow-y-auto"));
+  assert.ok(html.includes("<dialog"));
+  assert.ok(html.includes('aria-modal="true"'));
+  assert.ok(html.includes('aria-labelledby="'));
+  assert.ok(!html.includes('open=""'));
   const narrow = renderToStaticMarkup(React.createElement(ContentBlock, {
     block: { ...newBlock("announcement"), width: "compact", body: "Court" },
     settings: initialDocument.settings,
   }));
   assert.ok(narrow.includes("max-w-3xl"));
-  assert.equal((html.match(/Fermer l’annonce<\/span>/g) || []).length, 2);
+  assert.equal((html.match(/aria-label="Fermer l’annonce/g) || []).length, 1);
 });
 
 test("toutes les annonces, locales et globales, sont fermables sans rendre les pages ordinaires masquables", () => {
@@ -38,7 +124,7 @@ test("toutes les annonces, locales et globales, sont fermables sans rendre les p
   const announcement = { ...newBlock("announcement"), title: "Information du cabinet" };
   settings.announcements = [announcement];
   const global = renderToStaticMarkup(React.createElement(PublicShell, { settings, children: "Contenu principal" }));
-  assert.ok(global.includes('aria-label="Annonce : Information du cabinet"'));
+  assert.ok(global.includes("<dialog"));
   assert.ok(global.includes('aria-label="Fermer l’annonce : Information du cabinet"'));
   const local = renderToStaticMarkup(React.createElement(Blocks, { settings, scope: "test-page", blocks: [announcement] }));
   assert.ok(local.includes('aria-label="Fermer l’annonce : Information du cabinet"'));
@@ -78,7 +164,7 @@ test("les données structurées échappent le contenu et les variables suivent l
   assert.equal((html.match(/<script/g) || []).length, 1);
   assert.ok(html.includes("\\u003c/script>"));
   const text = renderToStaticMarkup(React.createElement(RichText, {
-    text: "{{practiceName}} — {{emails}} — {{address}}",
+    text: "{{practiceName}} : {{emails}} : {{address}}",
     settings: { ...initialDocument.settings, practiceName: "Nouveau nom", email: "nouveau@example.com" },
   }));
   assert.ok(text.includes("Nouveau nom"));
