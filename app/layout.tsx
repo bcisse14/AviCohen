@@ -3,6 +3,8 @@ import { Playfair_Display, Inter } from "next/font/google";
 import { getPublishedDocument } from "@/lib/cms/content";
 import "./globals.css";
 
+export const dynamic = "force-dynamic";
+
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
