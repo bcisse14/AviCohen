@@ -1,22 +1,12 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/lib/site-config";
+import { getPublishedDocument } from "@/lib/cms/content";
 
-const routes = [
-  "",
-  "/cabinet",
-  "/specialites/implantologie",
-  "/specialites/esthetique-dentaire",
-  "/specialites/dentisterie-numerique",
-  "/galerie",
-  "/espace-patient",
-  "/contact",
-];
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map((route) => ({
-    url: `${siteConfig.url}${route}`,
-    lastModified: new Date(),
+export const dynamic = "force-dynamic";
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const { pages, settings } = await getPublishedDocument();
+  return pages.filter((page) => !page.noindex).map((page) => ({
+    url: `${settings.url.replace(/\/$/, "")}${page.path}`,
     changeFrequency: "monthly",
-    priority: route === "" ? 1 : 0.7,
+    priority: page.path === "/" ? 1 : 0.7,
   }));
 }

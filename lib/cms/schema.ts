@@ -1,5 +1,14 @@
 import { z } from "zod";
 
+z.setErrorMap((issue) => {
+  if (issue.code === "too_small") return { message: `Valeur trop courte ou nombre d'éléments insuffisant (minimum : ${issue.minimum}).` };
+  if (issue.code === "too_big") return { message: `Limite dépassée (maximum : ${issue.maximum}).` };
+  if (issue.code === "invalid_type") return { message: "Champ obligatoire ou type de valeur incorrect." };
+  if (issue.code === "invalid_enum_value") return { message: "Choisissez une option valide." };
+  if (issue.code === "invalid_string") return { message: "Format invalide ; vérifiez la valeur saisie." };
+  return { message: "Valeur invalide." };
+});
+
 export function isSafeLink(value: string): boolean {
   if (/[\u0000-\u0020\\]/.test(value)) return false;
   return /^\/(?!\/)/.test(value) || /^https:\/\//i.test(value) ||
@@ -19,7 +28,7 @@ export function isSafeImage(value: string): boolean {
 }
 
 const text = z.string().max(30000);
-const short = z.string().max(300);
+const short = z.string().trim().max(300);
 export const linkSchema = z.string().max(2000).refine(isSafeLink, "Lien invalide : utilisez /une-page, https://, mailto: ou tel:.");
 export const imageSchema = z.object({
   src: z.string().max(2000).refine(isSafeImage, "Choisissez une image de la médiathèque."),
@@ -53,6 +62,7 @@ export const blockSchema = z.object({
   columns: z.number().int().min(1).max(4).default(3),
   images: z.array(imageSchema).max(100).default([]),
   buttons: z.array(buttonSchema).max(10).default([]),
+  showAppointments: z.boolean().default(false),
   items: z.array(z.object({ title: short, body: text })).max(100).default([]),
   startsAt: date.default(""),
   endsAt: date.default(""),
@@ -92,6 +102,7 @@ export const settingsSchema = z.object({
   description: z.string().max(2000),
   phone: z.string().max(50),
   email: z.string().email().max(254),
+  additionalEmails: z.array(z.string().email().max(254)).max(10).default([]),
   contactRecipient: z.string().email().max(254),
   address: z.object({
     streetAddress: short, postalCode: short, addressLocality: short,
@@ -118,6 +129,7 @@ export const settingsSchema = z.object({
 export const documentSchema = z.object({
   settings: settingsSchema,
   pages: z.array(pageSchema).min(1).max(100),
+  redirects: z.array(z.object({ from: pathSchema, pageId: z.string().min(1).max(100) })).max(500).default([]),
 }).superRefine((doc, ctx) => {
   const paths = new Set<string>();
   const ids = new Set<string>();
@@ -133,11 +145,27 @@ export const documentSchema = z.object({
     }
   }
   if (!paths.has("/")) ctx.addIssue({ code: "custom", path: ["pages"], message: "La page d'accueil est obligatoire." });
-  for (const item of [...doc.settings.navigation.flatMap((n) => [n, ...n.children]), ...doc.settings.footerLinks]) {
-    if (item.href.startsWith("/") && !paths.has(item.href)) {
-      ctx.addIssue({ code: "custom", path: ["settings", "navigation"], message: `Le lien ${item.href} ne correspond à aucune page.` });
+  const redirectPaths = new Set<string>();
+  for (const redirect of doc.redirects) {
+    if (paths.has(redirect.from) || redirectPaths.has(redirect.from) || !ids.has(redirect.pageId)) {
+      ctx.addIssue({ code: "custom", path: ["redirects"], message: "Une redirection doit avoir une ancienne adresse unique et pointer vers une page existante." });
+    }
+    redirectPaths.add(redirect.from);
+  }
+  const structuredLinks = [
+    ...doc.settings.navigation.flatMap((n) => [n, ...n.children]),
+    ...doc.settings.footerLinks, ...doc.settings.specialties, doc.settings.credit,
+    ...doc.settings.team.map((member) => ({ href: member.doctolibUrl })),
+    ...[...doc.pages.flatMap((p) => p.blocks), ...doc.settings.announcements].flatMap((block) => block.buttons),
+  ];
+  for (const item of structuredLinks) {
+    const path = item.href.split(/[?#]/)[0];
+    if (item.href.startsWith("/") && path && !paths.has(path) && !redirectPaths.has(path)) {
+      ctx.addIssue({ code: "custom", path: ["liens"], message: `Le lien ${item.href} ne correspond à aucune page. Retirez-le ou choisissez une page existante.` });
     }
   }
+  const announcementIds = doc.settings.announcements.map((block) => block.id);
+  if (new Set(announcementIds).size !== announcementIds.length) ctx.addIssue({ code: "custom", path: ["settings", "announcements"], message: "Identifiants d'annonces en double." });
 });
 
 export type CmsImage = z.infer<typeof imageSchema>;
@@ -152,7 +180,7 @@ export function newBlock(type: Block["type"]): Block {
     id: crypto.randomUUID(), type, eyebrow: "", title: "", body: "", visible: true,
     width: "standard" as const, background: "default" as const, align: "left" as const,
     imageSide: "right" as const, columns: 3, images: [], buttons: [], items: [],
-    startsAt: "", endsAt: "",
+    startsAt: "", endsAt: "", showAppointments: false,
   };
   return block;
 }

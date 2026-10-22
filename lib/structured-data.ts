@@ -1,12 +1,13 @@
-import { contactEmails, siteConfig, team } from "@/lib/site-config";
+import type { Settings } from "@/lib/cms/schema";
 
 /**
  * Données structurées schema.org (type Dentist + LocalBusiness) partagées
  * par la page d'accueil et la page contact. Toutes les valeurs
- * proviennent de `lib/site-config.ts` : mettre à jour ce fichier suffit à
- * répercuter le changement partout.
+ * proviennent des réglages publiés dans le CMS.
  */
-export function getDentistStructuredData() {
+export function getDentistStructuredData(siteConfig: Settings) {
+  const { team } = siteConfig;
+  const contactEmails = [siteConfig.email, ...siteConfig.additionalEmails];
   return {
     "@context": "https://schema.org",
     "@type": "Dentist",

@@ -7,9 +7,14 @@ import { CmsError } from "./repository";
 const scryptAsync = promisify(scrypt);
 export const sessionCookie = "cohen_cms_session";
 export const sessionSeconds = 8 * 60 * 60;
-export function missingConfiguration() {
-  return ["DATABASE_URL", "CMS_ADMIN_EMAIL", "CMS_ADMIN_PASSWORD_HASH", "CMS_SESSION_SECRET"]
+const hashPattern = /^scrypt:([a-f0-9]{32}):([a-f0-9]{128})$/;
+export function configurationIssues() {
+  const issues = ["DATABASE_URL", "CMS_ADMIN_EMAIL", "CMS_ADMIN_PASSWORD_HASH", "CMS_SESSION_SECRET"]
     .filter((key) => !process.env[key]);
+  if (process.env.CMS_SESSION_SECRET && process.env.CMS_SESSION_SECRET.length < 48) issues.push("CMS_SESSION_SECRET (48 caractères minimum)");
+  if (process.env.CMS_ADMIN_PASSWORD_HASH && !hashPattern.test(process.env.CMS_ADMIN_PASSWORD_HASH)) issues.push("CMS_ADMIN_PASSWORD_HASH (empreinte scrypt invalide)");
+  if (process.env.CMS_ADMIN_EMAIL && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(process.env.CMS_ADMIN_EMAIL)) issues.push("CMS_ADMIN_EMAIL (adresse e-mail invalide)");
+  return issues;
 }
 function secret(): string {
   const value = process.env.CMS_SESSION_SECRET;
@@ -27,7 +32,7 @@ export function signSession(now = Date.now()) {
   return `${payload}.${signature}`;
 }
 export function verifySession(token: string | undefined, now = Date.now()): boolean {
-  if (!token || token.length > 1000 || missingConfiguration().length) return false;
+  if (!token || token.length > 1000 || configurationIssues().length) return false;
   const [payload, signature, extra] = token.split(".");
   if (!payload || !signature || extra) return false;
   const expected = createHmac("sha256", secret()).update(payload).digest();
@@ -48,10 +53,10 @@ export function requireAdmin() {
   if (!isAuthenticated()) throw new CmsError(401, "Votre session a expiré. Reconnectez-vous ; vos modifications restent dans cette fenêtre.");
 }
 export async function checkCredentials(email: string, password: string) {
-  if (missingConfiguration().length) throw new CmsError(503, "L'administration n'est pas encore configurée.");
+  if (configurationIssues().length) throw new CmsError(503, "L'administration n'est pas encore correctement configurée.");
   secret();
   const configuredHash = process.env.CMS_ADMIN_PASSWORD_HASH || "";
-  const match = /^scrypt:([a-f0-9]{32}):([a-f0-9]{128})$/.exec(configuredHash);
+  const match = hashPattern.exec(configuredHash);
   if (!match?.[1] || !match[2]) throw new CmsError(503, "Le mot de passe administrateur est mal configuré. Exécutez npm run cms:password.");
   await ensureDatabase();
   // A shared database limit remains effective across serverless instances.

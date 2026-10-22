@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { SkipLink } from "@/components/ui";
-import { siteConfig } from "@/lib/site-config";
+import { getPublishedDocument } from "@/lib/cms/content";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -20,7 +17,9 @@ const inter = Inter({
   display: "swap",
 });
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  const { settings: siteConfig } = await getPublishedDocument();
+  return {
   metadataBase: new URL(siteConfig.url),
   title: {
     default: `${siteConfig.practiceName} - ${siteConfig.tagline}`,
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   openGraph: {
     type: "website",
-    locale: siteConfig.locale,
+    locale: "fr_FR",
     siteName: siteConfig.practiceName,
     title: `${siteConfig.practiceName} - ${siteConfig.tagline}`,
     description: siteConfig.description,
@@ -38,7 +37,8 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-};
+  };
+}
 
 export default function RootLayout({
   children,
@@ -48,10 +48,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${playfair.variable} ${inter.variable}`}>
       <body>
-        <SkipLink />
-        <Header />
-        <main id="contenu-principal">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

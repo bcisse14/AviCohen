@@ -54,11 +54,14 @@ export function createRepository(execute: Query, initialize: () => Promise<void>
         ), version AS (
           INSERT INTO cms_versions (document, reason)
           SELECT previous.draft, $4 FROM previous WHERE EXISTS (SELECT 1 FROM updated)
+        ), pruned AS (
+          DELETE FROM cms_versions WHERE id NOT IN
+            (SELECT id FROM cms_versions ORDER BY id DESC LIMIT 29)
+            AND EXISTS (SELECT 1 FROM updated)
         ) SELECT * FROM updated`,
         [JSON.stringify(valid), revision, publish, publish ? "Avant publication" : "Avant enregistrement"],
       );
       if (!rows[0]) throw new CmsError(409, "Le contenu a changé dans une autre fenêtre. Exportez vos modifications puis rechargez avant de continuer.");
-      await execute("DELETE FROM cms_versions WHERE id NOT IN (SELECT id FROM cms_versions ORDER BY id DESC LIMIT 30)");
       const row = rows[0];
       return { draft: documentSchema.parse(row.draft), revision: row.revision, updatedAt: iso(row.updated_at), publishedAt: iso(row.published_at) };
     },

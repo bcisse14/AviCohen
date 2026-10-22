@@ -29,16 +29,23 @@ export const schemaSql = [
 
 export type Query = <T extends Record<string, unknown> = Record<string, unknown>>(sql: string, params?: unknown[]) => Promise<T[]>;
 let connection: ReturnType<typeof neon> | undefined;
-export const query: Query = async <T extends Record<string, unknown>>(sql: string, params: unknown[] = []) => {
+function getConnection() {
   if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL manquante.");
   connection ??= neon(process.env.DATABASE_URL);
-  return await connection.query(sql, params) as T[];
+  return connection;
+}
+export const query: Query = async <T extends Record<string, unknown>>(sql: string, params: unknown[] = []) => {
+  return await getConnection().query(sql, params) as T[];
 };
 
 let ready: Promise<void> | undefined;
 export function ensureDatabase(): Promise<void> {
   ready ??= (async () => {
-    for (const sql of schemaSql) await query(sql);
+    const sql = getConnection();
+    await sql.transaction([
+      sql.query("SELECT pg_advisory_xact_lock(hashtext('cohen-mini-cms-schema-v1'))"),
+      ...schemaSql.map((statement) => sql.query(statement)),
+    ]);
   })().catch((error: unknown) => {
     ready = undefined;
     throw error;

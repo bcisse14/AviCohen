@@ -1,5 +1,9 @@
 /**
- * Configuration centrale du site.
+ * Anciennes données statiques, conservées pour les composants historiques.
+ * Le site public utilise désormais le CMS (lib/cms/content.ts).
+ * Modifier ce fichier ne met pas à jour un site administré :
+ * utiliser /admin. Le contenu d'initialisation est dans
+ * lib/cms/initial-content.json.
  *
  * IMPORTANT : ce fichier regroupe toutes les informations encore
  * provisoires ou non confirmées par le client (adresse exacte, téléphone,

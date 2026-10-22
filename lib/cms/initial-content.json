@@ -7,6 +7,9 @@
     "description": "Cabinet dentaire des Docteurs Cohen à Paris 12e, spécialisé en implantologie, esthétique dentaire et dentisterie numérique (CFAO).",
     "phone": "01.43.40.98.38",
     "email": "docteurcoheng@gmail.com",
+    "additionalEmails": [
+      "docteurcohena@gmail.com"
+    ],
     "contactRecipient": "docteurcohena@gmail.com",
     "address": {
       "streetAddress": "87 avenue du général Michel Bizot",
@@ -151,7 +154,7 @@
         {
           "id": "initial-1",
           "type": "split",
-          "eyebrow": "Chirurgiens-dentistes à Paris 12e",
+          "eyebrow": "{{tagline}}",
           "title": "Un sourire soigné, dans un cabinet pensé pour vous mettre à l'aise",
           "body": "Les Docteurs Avi Cohen et Gilles Cohen accompagnent leurs patients à Paris 12e en implantologie, esthétique dentaire et dentisterie numérique, avec une attention constante portée au confort et à la clarté des explications.",
           "visible": true,
@@ -326,19 +329,12 @@
             {
               "label": "Contacter le cabinet",
               "href": "/contact"
-            },
-            {
-              "label": "Doctolib - Dr Avi Cohen",
-              "href": "https://www.doctolib.fr/dentiste/paris/avi-cohen/booking/places?specialityId=1&telehealth=false&profile_skipped=true&source=external_referral"
-            },
-            {
-              "label": "Doctolib - Dr Gilles Cohen",
-              "href": "https://www.doctolib.fr/dentiste/paris/gilles-cohen/booking/motives?specialityId=1&telehealth=false&placeId=practice-262&profile_skipped=true&source=external_referral"
             }
           ],
           "items": [],
           "startsAt": "",
-          "endsAt": ""
+          "endsAt": "",
+          "showAppointments": true
         }
       ]
     },
@@ -548,7 +544,7 @@
           "type": "gallery",
           "eyebrow": "Résultats cliniques",
           "title": "Exemples de restaurations en implantologie",
-          "body": "Ces cas illustrent des situations traitées au cabinet, avec une attention portée à la stabilité du résultat et à l'intégration esthétique dans le sourire.\n\n### Cas clinique 1\n\nRestauration de la fonction et de l'esthétique avec un résultat stable et naturel.\n\n### Cas clinique 2\n\nRééquilibrage du sourire et amélioration de l'alignement prothétique après traitement.",
+          "body": "Ces cas illustrent des situations traitées au cabinet, avec une attention portée à la stabilité du résultat et à l'intégration esthétique dans le sourire.",
           "visible": true,
           "width": "standard",
           "background": "default",
@@ -559,7 +555,7 @@
             {
               "src": "/images/implantologie_1.webp",
               "alt": "Avant et après réhabilitation implantaire du sourire",
-              "caption": "",
+              "caption": "Cas clinique 1 — Restauration de la fonction et de l'esthétique avec un résultat stable et naturel.",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"
@@ -567,7 +563,7 @@
             {
               "src": "/images/implantologie_2.webp",
               "alt": "Résultat de traitement implantaire avec intégration esthétique",
-              "caption": "",
+              "caption": "Cas clinique 2 — Rééquilibrage du sourire et amélioration de l'alignement prothétique après traitement.",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"
@@ -661,7 +657,7 @@
           "type": "split",
           "eyebrow": "Notre approche",
           "title": "Un sourire qui vous ressemble",
-          "body": "L'esthétique dentaire ne se limite pas à blanchir les dents : elle consiste à harmoniser la forme, la teinte et l'alignement du sourire, en tenant compte des proportions naturelles du visage. Chaque traitement est proposé après un échange sur vos attentes et un examen clinique complet.\n\nLe contenu détaillé est masqué.\n\n### Des restaurations esthétiques réalisées avec précision\n\n#### Facettes céramiques en une seule séance\n\nAprès préparation de la dent, une empreinte optique remplace l'empreinte traditionnelle. La facette est conçue numériquement puis fabriquée sur place, avant d'être collée directement, souvent en une seule séance.\n\n#### Couronnes esthétiques\n\nLe même principe s'applique à la réalisation de couronnes complètes, avec un rendu naturel proche de la dent d'origine, sans les délais habituellement nécessaires à un laboratoire externe.\n\n#### Remplacement d'anciennes restaurations\n\nLes anciens amalgames ou restaurations vieillissantes peuvent être remplacés par des inlays ou onlays en céramique, réalisés eux aussi en une seule séance grâce aux outils numériques du cabinet.",
+          "body": "L'esthétique dentaire ne se limite pas à blanchir les dents : elle consiste à harmoniser la forme, la teinte et l'alignement du sourire, en tenant compte des proportions naturelles du visage. Chaque traitement est proposé après un échange sur vos attentes et un examen clinique complet.",
           "visible": true,
           "width": "standard",
           "background": "default",
@@ -679,7 +675,12 @@
             }
           ],
           "buttons": [],
-          "items": [],
+          "items": [
+            {
+              "title": "Des restaurations esthétiques réalisées avec précision",
+              "body": "#### Facettes céramiques en une seule séance\n\nAprès préparation de la dent, une empreinte optique remplace l'empreinte traditionnelle. La facette est conçue numériquement puis fabriquée sur place, avant d'être collée directement, souvent en une seule séance.\n\n#### Couronnes esthétiques\n\nLe même principe s'applique à la réalisation de couronnes complètes, avec un rendu naturel proche de la dent d'origine, sans les délais habituellement nécessaires à un laboratoire externe.\n\n#### Remplacement d'anciennes restaurations\n\nLes anciens amalgames ou restaurations vieillissantes peuvent être remplacés par des inlays ou onlays en céramique, réalisés eux aussi en une seule séance grâce aux outils numériques du cabinet."
+            }
+          ],
           "startsAt": "",
           "endsAt": ""
         },
@@ -719,7 +720,7 @@
           "type": "gallery",
           "eyebrow": "Avant / après",
           "title": "Exemples de résultats en esthétique dentaire",
-          "body": "Une sélection de cas traités au cabinet pour illustrer les possibilités d'harmonisation du sourire selon la situation clinique de chaque patient.\n\nAvant\n\nAprès\n\nAvant\n\nAprès\n\nAvant\n\nAprès",
+          "body": "Une sélection de cas traités au cabinet pour illustrer les possibilités d'harmonisation du sourire selon la situation clinique de chaque patient.",
           "visible": true,
           "width": "standard",
           "background": "default",
@@ -730,7 +731,7 @@
             {
               "src": "/images/avant_1.jpg",
               "alt": "Sourire avant traitement esthétique, cas 1",
-              "caption": "",
+              "caption": "Cas 1 — Avant",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"
@@ -738,7 +739,7 @@
             {
               "src": "/images/apres_1.jpg",
               "alt": "Sourire après traitement esthétique, cas 1",
-              "caption": "",
+              "caption": "Cas 1 — Après",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"
@@ -746,7 +747,7 @@
             {
               "src": "/images/avant_2.jpg",
               "alt": "Sourire avant traitement esthétique, cas 2",
-              "caption": "",
+              "caption": "Cas 2 — Avant",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"
@@ -754,7 +755,7 @@
             {
               "src": "/images/apres_2.jpg",
               "alt": "Sourire après traitement esthétique, cas 2",
-              "caption": "",
+              "caption": "Cas 2 — Après",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"
@@ -762,7 +763,7 @@
             {
               "src": "/images/avant_3.png",
               "alt": "Restauration dentaire avant traitement, cas 3",
-              "caption": "",
+              "caption": "Cas 3 — Avant",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"
@@ -770,7 +771,7 @@
             {
               "src": "/images/apres_3.png",
               "alt": "Restauration dentaire après traitement, cas 3",
-              "caption": "",
+              "caption": "Cas 3 — Après",
               "fit": "cover",
               "position": "center",
               "ratio": "landscape"
@@ -853,7 +854,7 @@
           "type": "split",
           "eyebrow": "Empreinte optique",
           "title": "Adieu la pâte à empreinte",
-          "body": "Le scanner intra oral capture en quelques minutes un modèle numérique précis de la bouche, sans pâte ni porte-empreinte. Le confort est immédiat et le résultat peut être visualisé directement à l'écran avec vous.\n\nLe contenu détaillé est masqué.\n\n### Comment fonctionne la CFAO au cabinet\n\n#### L'empreinte optique\n\nUn scanner intra oral capture directement la bouche du patient, sans pâte ni porte empreinte. Le modèle numérique obtenu est visible à l'écran presque instantanément.\n\n#### La conception assistée par ordinateur\n\nÀ partir de cette empreinte, la restauration (couronne, facette, inlay ou onlay) est modélisée numériquement. Cette étape permet d'ajuster la forme et les proportions avant toute fabrication.\n\n#### La fabrication assistée par ordinateur\n\nUne fois le projet validé, les données sont envoyées vers les outils de fabrication du cabinet, qui produisent la restauration directement sur place, en réduisant les délais et le nombre de rendez-vous nécessaires.\n\n#### Les avantages de cette approche\n\nUne céramique biocompatible et sans métal, une précision renforcée par la numérisation, un confort accru pour le patient, et dans de nombreux cas, un traitement réalisable en une seule séance.",
+          "body": "Le scanner intra oral capture en quelques minutes un modèle numérique précis de la bouche, sans pâte ni porte-empreinte. Le confort est immédiat et le résultat peut être visualisé directement à l'écran avec vous.",
           "visible": true,
           "width": "standard",
           "background": "default",
@@ -871,7 +872,12 @@
             }
           ],
           "buttons": [],
-          "items": [],
+          "items": [
+            {
+              "title": "Comment fonctionne la CFAO au cabinet",
+              "body": "#### L'empreinte optique\n\nUn scanner intra oral capture directement la bouche du patient, sans pâte ni porte empreinte. Le modèle numérique obtenu est visible à l'écran presque instantanément.\n\n#### La conception assistée par ordinateur\n\nÀ partir de cette empreinte, la restauration (couronne, facette, inlay ou onlay) est modélisée numériquement. Cette étape permet d'ajuster la forme et les proportions avant toute fabrication.\n\n#### La fabrication assistée par ordinateur\n\nUne fois le projet validé, les données sont envoyées vers les outils de fabrication du cabinet, qui produisent la restauration directement sur place, en réduisant les délais et le nombre de rendez-vous nécessaires.\n\n#### Les avantages de cette approche\n\nUne céramique biocompatible et sans métal, une précision renforcée par la numérisation, un confort accru pour le patient, et dans de nombreux cas, un traitement réalisable en une seule séance."
+            }
+          ],
           "startsAt": "",
           "endsAt": ""
         },
@@ -1020,7 +1026,7 @@
           "type": "gallery",
           "eyebrow": "",
           "title": "",
-          "body": "- L'accueil du cabinet\n\n- Détail d'une salle de soin\n\n- Un cadre soigné",
+          "body": "",
           "visible": true,
           "width": "standard",
           "background": "default",
@@ -1031,26 +1037,26 @@
             {
               "src": "/images/accueil-secretariat-02.jpg",
               "alt": "Espace accueil et secrétariat du cabinet des Docteurs Cohen",
-              "caption": "",
+              "caption": "L'accueil du cabinet",
               "fit": "cover",
               "position": "center",
-              "ratio": "landscape"
+              "ratio": "square"
             },
             {
               "src": "/images/cabinet-detail-salle-02.jpg",
               "alt": "Détail d'une salle de soin du cabinet des Docteurs Cohen",
-              "caption": "",
+              "caption": "Détail d'une salle de soin",
               "fit": "cover",
               "position": "center",
-              "ratio": "landscape"
+              "ratio": "square"
             },
             {
               "src": "/images/deco-miroir-detail.jpg",
               "alt": "Détail de décoration du cabinet, avec un miroir mettant en valeur l'espace",
-              "caption": "",
+              "caption": "Un cadre soigné",
               "fit": "cover",
               "position": "center",
-              "ratio": "landscape"
+              "ratio": "square"
             }
           ],
           "buttons": [],
@@ -1241,7 +1247,7 @@
           "type": "text",
           "eyebrow": "",
           "title": "Éditeur du site",
-          "body": "Le présent site est édité par {{practiceName}}, situé au {{address}}.\n\nTéléphone : {{phone}}\n\nE-mail : {{email}}",
+          "body": "Le présent site est édité par {{practiceName}}, situé au {{address}}.\n\nTéléphone : {{phone}}\n\nE-mails : {{emails}}",
           "visible": true,
           "width": "standard",
           "background": "default",
@@ -1295,7 +1301,7 @@
           "type": "text",
           "eyebrow": "",
           "title": "Données personnelles",
-          "body": "Les données transmises via le formulaire de contact sont utilisées uniquement pour traiter votre demande. Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification et de suppression de vos données, en adressant votre demande à : {{email}} ou docteurcohena@gmail.com.",
+          "body": "Les données transmises via le formulaire de contact sont utilisées uniquement pour traiter votre demande. Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification et de suppression de vos données, en adressant votre demande à : {{emails}}.",
           "visible": true,
           "width": "standard",
           "background": "default",
@@ -1349,7 +1355,7 @@
           "type": "text",
           "eyebrow": "",
           "title": "Conception et réalisation",
-          "body": "Site réalisé par Karlsefni : [https://bafode-cisse.vercel.app/](https://bafode-cisse.vercel.app/)",
+          "body": "Site réalisé par Karlsefni : [https://bafodecisse.fr/](https://bafodecisse.fr/)\nE-mail : [cissebafode.pro@gmail.com](mailto:cissebafode.pro@gmail.com)",
           "visible": true,
           "width": "standard",
           "background": "default",

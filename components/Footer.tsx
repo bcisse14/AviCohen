@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { contactEmails, navigation, siteConfig } from "@/lib/site-config";
+import type { Settings } from "@/lib/cms/schema";
 import { IconClock, IconMail, IconPhone, IconPin } from "@/components/icons";
 
-export function Footer() {
+export function Footer({ settings: siteConfig }: { settings: Settings }) {
+  const { navigation } = siteConfig;
+  const contactEmails = [siteConfig.email, ...siteConfig.additionalEmails];
   return (
     <footer className="border-t border-border bg-surface">
       <div className="container-site grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
@@ -81,16 +83,18 @@ export function Footer() {
             réservés.
           </p>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <Link href="/mentions-legales" className="no-underline hover:text-accent">
-              Mentions légales
-            </Link>
+            {siteConfig.footerLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="no-underline hover:text-accent">
+                {link.label}
+              </Link>
+            ))}
             <a
-              href="https://bafode-cisse.vercel.app/"
+              href={siteConfig.credit.href}
               target="_blank"
               rel="noopener noreferrer"
               className="no-underline hover:text-accent"
             >
-              Site réalisé par Karlsefni
+              {siteConfig.credit.label}
             </a>
           </div>
         </div>

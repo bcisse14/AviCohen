@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { siteConfig } from "@/lib/site-config";
+import { getPublishedDocument } from "@/lib/cms/content";
 
 // Force l'exécution dynamique : cette route ne doit jamais être mise en
 // cache (elle traite des données de formulaire).
@@ -88,7 +88,16 @@ export async function POST(request: Request) {
   }
 
   const resend = new Resend(apiKey);
-  const to = process.env.CONTACT_EMAIL_TO || siteConfig.email;
+  let siteConfig;
+  try {
+    siteConfig = (await getPublishedDocument()).settings;
+  } catch (error) {
+    console.error("Impossible de lire les coordonnées publiées du cabinet :", error);
+    return NextResponse.json({ message: "Le service de contact est momentanément indisponible." }, { status: 503 });
+  }
+  const to = process.env.DATABASE_URL
+    ? siteConfig.contactRecipient
+    : process.env.CONTACT_EMAIL_TO || siteConfig.contactRecipient;
   // TODO (déploiement) : tant que le domaine du cabinet n'est pas vérifié
   // sur Resend, l'adresse d'expédition doit rester "onboarding@resend.dev".
   const from = process.env.CONTACT_EMAIL_FROM || "onboarding@resend.dev";

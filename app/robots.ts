@@ -1,12 +1,15 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/lib/site-config";
+import { getPublishedDocument } from "@/lib/cms/content";
 
-export default function robots(): MetadataRoute.Robots {
+export const dynamic = "force-dynamic";
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const { settings } = await getPublishedDocument();
   return {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/admin", "/api/admin/", "/preview/"],
     },
-    sitemap: `${siteConfig.url}/sitemap.xml`,
+    sitemap: `${settings.url.replace(/\/$/, "")}/sitemap.xml`,
   };
 }
