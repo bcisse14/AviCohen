@@ -48,6 +48,11 @@ export const siteConfig = {
   },
 } as const;
 
+export const contactEmails = [
+  siteConfig.email,
+  "docteurcohena@gmail.com",
+] as const;
+
 export type TeamMember = {
   slug: string;
   name: string;

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
-import { siteConfig } from "@/lib/site-config";
+import { contactEmails, siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Mentions légales",
@@ -34,7 +34,7 @@ export default function MentionsLegalesPage() {
             <p className="mt-3 leading-relaxed text-muted">
               Téléphone : {siteConfig.phone}
               <br />
-              E-mail : {siteConfig.email}
+              E-mails : {contactEmails.join(" / ")}
             </p>
           </article>
 
@@ -64,7 +64,7 @@ export default function MentionsLegalesPage() {
               uniquement pour traiter votre demande. Conformément au Règlement
               Général sur la Protection des Données (RGPD), vous disposez d&apos;un
               droit d&apos;accès, de rectification et de suppression de vos données,
-              en adressant votre demande à : {siteConfig.email}.
+              en adressant votre demande à : {contactEmails.join(" ou ")}.
             </p>
           </article>
 
@@ -93,12 +93,20 @@ export default function MentionsLegalesPage() {
             <p className="mt-4 leading-relaxed text-muted">
               Site réalisé par Karlsefni :{" "}
               <a
-                href="https://bafode-cisse.vercel.app/"
+                href="https://bafodecisse.fr/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-ink no-underline hover:text-accent"
               >
-                https://bafode-cisse.vercel.app/
+                https://bafodecisse.fr/
+              </a>
+              <br />
+              E-mail :{" "}
+              <a
+                href="mailto:cissebafode.pro@gmail.com"
+                className="text-ink no-underline hover:text-accent"
+              >
+                cissebafode.pro@gmail.com
               </a>
             </p>
           </article>

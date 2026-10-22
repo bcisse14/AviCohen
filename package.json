@@ -7,13 +7,21 @@
     "build": "next build",
     "start": "node scripts/start.js",
     "start:next": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test:cms": "tsx --test tests/cms/*.test.ts",
+    "cms:password": "node scripts/cms-password.mjs"
   },
   "dependencies": {
     "next": "14.2.35",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "resend": "^3.5.0"
+    "resend": "^3.5.0",
+    "@neondatabase/serverless": "^1.0.2",
+    "@vercel/blob": "^2.0.0",
+    "react-markdown": "^10.1.0",
+    "sharp": "^0.34.0",
+    "zod": "^3.25.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",
@@ -24,6 +32,8 @@
     "eslint-config-next": "14.2.35",
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.6",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.3",
+    "tsx": "^4.20.0",
+    "@electric-sql/pglite": "^0.3.0"
   }
 }

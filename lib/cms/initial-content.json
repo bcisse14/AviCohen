@@ -1,0 +1,1368 @@
+{
+  "settings": {
+    "name": "Docteurs Cohen",
+    "practiceName": "Cabinet des Docteurs Cohen",
+    "tagline": "Chirurgiens-dentistes à Paris 12e",
+    "url": "https://www.dr-avi-cohen-dentiste.fr",
+    "description": "Cabinet dentaire des Docteurs Cohen à Paris 12e, spécialisé en implantologie, esthétique dentaire et dentisterie numérique (CFAO).",
+    "phone": "01.43.40.98.38",
+    "email": "docteurcoheng@gmail.com",
+    "contactRecipient": "docteurcohena@gmail.com",
+    "address": {
+      "streetAddress": "87 avenue du général Michel Bizot",
+      "postalCode": "75012",
+      "addressLocality": "Paris",
+      "addressRegion": "Île-de-France",
+      "addressCountry": "FR"
+    },
+    "openingHours": [
+      {
+        "days": "Lundi - Vendredi",
+        "hours": "9h00 - 19h00"
+      },
+      {
+        "days": "Samedi",
+        "hours": "9h00 - 13h00"
+      },
+      {
+        "days": "Dimanche",
+        "hours": "Fermé"
+      }
+    ],
+    "team": [
+      {
+        "id": "avi-cohen",
+        "name": "Dr Avi Cohen",
+        "title": "Chirurgien-dentiste",
+        "bio": "Le Dr Avi Cohen exerce au cabinet et accompagne ses patients en implantologie, esthétique dentaire et dentisterie numérique, avec une attention constante portée à la clarté des explications avant chaque soin.",
+        "photo": {
+          "src": "/images/Cohen_avi.webp",
+          "alt": "Portrait du Dr Avi Cohen, chirurgien-dentiste",
+          "caption": "",
+          "fit": "cover",
+          "position": "center",
+          "ratio": "landscape"
+        },
+        "doctolibUrl": "https://www.doctolib.fr/dentiste/paris/avi-cohen/booking/places?specialityId=1&telehealth=false&profile_skipped=true&source=external_referral"
+      },
+      {
+        "id": "gilles-cohen",
+        "name": "Dr Gilles Cohen",
+        "title": "Chirurgien-dentiste",
+        "bio": "Le Dr Gilles Cohen accompagne les patients du cabinet en proposant une prise en charge attentive, fondée sur l'écoute, la pédagogie et la précision des gestes cliniques à chaque étape du traitement.",
+        "photo": {
+          "src": "/images/Cohen_Gilles.webp",
+          "alt": "Portrait du Dr Gilles Cohen, chirurgien-dentiste",
+          "caption": "",
+          "fit": "cover",
+          "position": "center",
+          "ratio": "landscape"
+        },
+        "doctolibUrl": "https://www.doctolib.fr/dentiste/paris/gilles-cohen/booking/motives?specialityId=1&telehealth=false&placeId=practice-262&profile_skipped=true&source=external_referral"
+      }
+    ],
+    "specialties": [
+      {
+        "id": "implantologie",
+        "title": "Implantologie",
+        "summary": "Remplacement durable des dents manquantes grâce à des implants intégrés chirurgicalement dans l'os maxillaire.",
+        "href": "/specialites/implantologie"
+      },
+      {
+        "id": "esthetique-dentaire",
+        "title": "Esthétique dentaire",
+        "summary": "Des soins pensés pour harmoniser la forme, la teinte et l'alignement du sourire, avec un rendu naturel.",
+        "href": "/specialites/esthetique-dentaire"
+      },
+      {
+        "id": "dentisterie-numerique",
+        "title": "Dentisterie numérique",
+        "summary": "Empreintes optiques, conception et fabrication assistées par ordinateur pour des soins plus précis et plus rapides.",
+        "href": "/specialites/dentisterie-numerique"
+      }
+    ],
+    "navigation": [
+      {
+        "label": "Accueil",
+        "href": "/",
+        "children": []
+      },
+      {
+        "label": "Le cabinet",
+        "href": "/cabinet",
+        "children": []
+      },
+      {
+        "label": "Spécialités",
+        "href": "/specialites/implantologie",
+        "children": [
+          {
+            "label": "Implantologie",
+            "href": "/specialites/implantologie"
+          },
+          {
+            "label": "Esthétique dentaire",
+            "href": "/specialites/esthetique-dentaire"
+          },
+          {
+            "label": "Dentisterie numérique",
+            "href": "/specialites/dentisterie-numerique"
+          }
+        ]
+      },
+      {
+        "label": "Galerie",
+        "href": "/galerie",
+        "children": []
+      },
+      {
+        "label": "Espace patient",
+        "href": "/espace-patient",
+        "children": []
+      },
+      {
+        "label": "Contact",
+        "href": "/contact",
+        "children": []
+      }
+    ],
+    "footerLinks": [
+      {
+        "label": "Mentions légales",
+        "href": "/mentions-legales"
+      }
+    ],
+    "credit": {
+      "label": "Site réalisé par Karlsefni",
+      "href": "https://bafode-cisse.vercel.app/"
+    },
+    "accent": "#c9a24b",
+    "announcements": []
+  },
+  "pages": [
+    {
+      "id": "home",
+      "path": "/",
+      "title": "Accueil",
+      "description": "Les Docteurs Avi Cohen et Gilles Cohen accompagnent leurs patients à Paris 12e en implantologie, esthétique dentaire et dentisterie numérique, avec une attention constante portée au confort et à la clarté des explications.",
+      "ogImage": "/images/cabinet-salle-soin-01.jpg",
+      "noindex": false,
+      "blocks": [
+        {
+          "id": "initial-1",
+          "type": "split",
+          "eyebrow": "Chirurgiens-dentistes à Paris 12e",
+          "title": "Un sourire soigné, dans un cabinet pensé pour vous mettre à l'aise",
+          "body": "Les Docteurs Avi Cohen et Gilles Cohen accompagnent leurs patients à Paris 12e en implantologie, esthétique dentaire et dentisterie numérique, avec une attention constante portée au confort et à la clarté des explications.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 3,
+          "images": [
+            {
+              "src": "/images/cabinet-salle-soin-01.jpg",
+              "alt": "Salle de soin du cabinet des Docteurs Cohen, équipée et lumineuse",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            }
+          ],
+          "buttons": [
+            {
+              "label": "Prendre rendez-vous",
+              "href": "/contact"
+            },
+            {
+              "label": "Découvrir le cabinet",
+              "href": "/cabinet"
+            }
+          ],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-2",
+          "type": "split",
+          "eyebrow": "Le cabinet",
+          "title": "Un cabinet proche de la Porte Dorée",
+          "body": "Le cabinet des Docteurs Cohen est situé à Paris, à proximité de la Porte Dorée, dans un cadre facilement accessible. Il est animé par deux praticiens, pour un accompagnement personnalisé à chaque étape de votre suivi dentaire.",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 3,
+          "images": [
+            {
+              "src": "/images/porte-doree-quartier.webp",
+              "alt": "La Porte Dorée, à proximité du cabinet",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            }
+          ],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-3",
+          "type": "details",
+          "eyebrow": "Infos pratiques",
+          "title": "Coordonnées et prise de rendez-vous",
+          "body": "",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 3,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-4",
+          "type": "specialties",
+          "eyebrow": "Nos spécialités",
+          "title": "Trois domaines d'expertise, un seul objectif : votre confort",
+          "body": "",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 3,
+          "images": [],
+          "buttons": [],
+          "items": [
+            {
+              "title": "Implantologie dentaire",
+              "body": "[Remplacement durable des dents manquantes grâce à des implants intégrés chirurgicalement dans l'os maxillaire.\n\nEn savoir plus →](/specialites/implantologie)"
+            },
+            {
+              "title": "Esthétique dentaire",
+              "body": "[Des soins pensés pour harmoniser la forme, la teinte et l'alignement du sourire, avec un rendu naturel.\n\nEn savoir plus →](/specialites/esthetique-dentaire)"
+            },
+            {
+              "title": "Dentisterie numérique (CFAO)",
+              "body": "[Empreintes optiques, conception et fabrication assistées par ordinateur pour des soins plus précis et plus rapides.\n\nEn savoir plus →](/specialites/dentisterie-numerique)"
+            }
+          ],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-5",
+          "type": "team",
+          "eyebrow": "L'équipe",
+          "title": "Deux chirurgiens-dentistes à votre écoute",
+          "body": "",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 3,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-6",
+          "type": "cards",
+          "eyebrow": "",
+          "title": "",
+          "body": "",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 3,
+          "images": [],
+          "buttons": [],
+          "items": [
+            {
+              "title": "Hygiène et sécurité",
+              "body": "Des protocoles stricts de stérilisation et de désinfection, appliqués à chaque étape des soins."
+            },
+            {
+              "title": "Approche personnalisée",
+              "body": "Chaque traitement est expliqué en langage simple, avant toute décision, pour que vous restiez acteur de vos soins."
+            },
+            {
+              "title": "Prise de rendez-vous simple",
+              "body": "Réservez un créneau en ligne via Doctolib ou contactez directement le cabinet."
+            }
+          ],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-7",
+          "type": "text",
+          "eyebrow": "",
+          "title": "Une question, un besoin de rendez-vous ?",
+          "body": "L'équipe du cabinet vous répond et vous accompagne dans vos démarches.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 3,
+          "images": [],
+          "buttons": [
+            {
+              "label": "Contacter le cabinet",
+              "href": "/contact"
+            },
+            {
+              "label": "Doctolib - Dr Avi Cohen",
+              "href": "https://www.doctolib.fr/dentiste/paris/avi-cohen/booking/places?specialityId=1&telehealth=false&profile_skipped=true&source=external_referral"
+            },
+            {
+              "label": "Doctolib - Dr Gilles Cohen",
+              "href": "https://www.doctolib.fr/dentiste/paris/gilles-cohen/booking/motives?specialityId=1&telehealth=false&placeId=practice-262&profile_skipped=true&source=external_referral"
+            }
+          ],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        }
+      ]
+    },
+    {
+      "id": "cabinet",
+      "path": "/cabinet",
+      "title": "Le cabinet",
+      "description": "De l'accueil à la salle de soin, chaque espace du cabinet a été conçu pour vous accompagner sereinement, avec des équipements récents et un environnement soigné.",
+      "ogImage": "/images/accueil-secretariat-01.jpg",
+      "noindex": false,
+      "blocks": [
+        {
+          "id": "initial-1",
+          "type": "text",
+          "eyebrow": "Le cabinet",
+          "title": "Un cabinet à taille humaine, pensé pour votre confort",
+          "body": "De l'accueil à la salle de soin, chaque espace du cabinet a été conçu pour vous accompagner sereinement, avec des équipements récents et un environnement soigné.",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-2",
+          "type": "split",
+          "eyebrow": "L'accueil",
+          "title": "Un accueil chaleureux, dès votre arrivée",
+          "body": "Le secrétariat du cabinet vous accueille et vous accompagne pour toutes les démarches administratives : prise de rendez-vous, suivi des dossiers de mutuelle et organisation du planning de soin. Un espace pensé pour que l'attente reste agréable.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [
+            {
+              "src": "/images/accueil-secretariat-01.jpg",
+              "alt": "Accueil et secrétariat du cabinet des Docteurs Cohen",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            }
+          ],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-3",
+          "type": "split",
+          "eyebrow": "La salle de soin",
+          "title": "Un plateau technique récent, entretenu avec rigueur",
+          "body": "Chaque salle de soin est équipée pour répondre aux besoins de l'implantologie, de l'esthétique dentaire et de la dentisterie numérique, avec des protocoles d'hygiène stricts appliqués avant et après chaque patient.",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [
+            {
+              "src": "/images/cabinet-salle-soin-03.jpg",
+              "alt": "Salle de soin du cabinet, équipée de matériel dentaire récent",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            }
+          ],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-4",
+          "type": "split",
+          "eyebrow": "Le cabinet en un coup d'œil",
+          "title": "Une prise en charge claire, à chaque étape",
+          "body": "Avant tout soin, le déroulement du traitement, les délais et les coûts vous sont expliqués simplement, afin que vous puissiez prendre vos décisions en toute confiance.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [
+            {
+              "src": "/images/espace-attente-couloir.jpg",
+              "alt": "Autre vue de la salle de soin du cabinet des Docteurs Cohen",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            }
+          ],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        }
+      ]
+    },
+    {
+      "id": "specialites-implantologie",
+      "path": "/specialites/implantologie",
+      "title": "Implantologie dentaire",
+      "description": "Une solution durable pour remplacer une ou plusieurs dents manquantes, en restaurant à la fois la fonction masticatoire et l'esthétique du sourire.",
+      "ogImage": "/images/implantologie_1.webp",
+      "noindex": false,
+      "blocks": [
+        {
+          "id": "initial-1",
+          "type": "text",
+          "eyebrow": "Spécialité",
+          "title": "Implantologie dentaire",
+          "body": "Une solution durable pour remplacer une ou plusieurs dents manquantes, en restaurant à la fois la fonction masticatoire et l'esthétique du sourire.",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-2",
+          "type": "split",
+          "eyebrow": "",
+          "title": "Qu'est-ce qu'un implant dentaire ?",
+          "body": "Un implant dentaire est une racine artificielle, le plus souvent en titane, insérée chirurgicalement dans l'os de la mâchoire. Une fois intégré, il sert de support à une couronne, un bridge ou une prothèse amovible, selon la situation de chaque patient. Cette solution évite de tailler les dents voisines, contrairement à un bridge classique.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [
+            {
+              "src": "/images/implantologie_1.webp",
+              "alt": "Avant et après réhabilitation implantaire du sourire",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            }
+          ],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-3",
+          "type": "cards",
+          "eyebrow": "Déroulement",
+          "title": "Les grandes étapes d'un traitement implantaire",
+          "body": "",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [
+            {
+              "title": "Première phase : la pose de l'implant",
+              "body": "Étape 1\n\nL'intervention se déroule sous anesthésie locale. Le praticien ouvre la gencive au niveau de la zone édentée, prépare un petit logement dans l'os, puis met en place l'implant. La gencive est ensuite refermée."
+            },
+            {
+              "title": "Une dizaine de jours plus tard",
+              "body": "Étape 2\n\nLes fils de suture sont retirés. Une couronne provisoire peut être posée à ce stade si nécessaire."
+            },
+            {
+              "title": "La période de cicatrisation",
+              "body": "Étape 3\n\nPendant trois à six mois, l'os se consolide progressivement autour de l'implant, un phénomène appelé ostéointégration. C'est un processus comparable à la consolidation d'une fracture osseuse."
+            },
+            {
+              "title": "Deuxième phase : la mise en charge",
+              "body": "Étape 4\n\nUne petite ouverture de la gencive permet de découvrir l'implant. Une vis de cicatrisation est mise en place, puis remplacée une semaine plus tard par un pilier implantaire, qui fait l'intermédiaire entre l'implant et la future couronne. Une empreinte est alors prise avant la pose de la couronne définitive."
+            },
+            {
+              "title": "Le suivi au quotidien",
+              "body": "Étape 5\n\nTout porteur d'implant doit maintenir une hygiène bucco dentaire rigoureuse, matin et soir, et effectuer un contrôle clinique et radiologique une fois par an."
+            }
+          ],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-4",
+          "type": "gallery",
+          "eyebrow": "Résultats cliniques",
+          "title": "Exemples de restaurations en implantologie",
+          "body": "Ces cas illustrent des situations traitées au cabinet, avec une attention portée à la stabilité du résultat et à l'intégration esthétique dans le sourire.\n\n### Cas clinique 1\n\nRestauration de la fonction et de l'esthétique avec un résultat stable et naturel.\n\n### Cas clinique 2\n\nRééquilibrage du sourire et amélioration de l'alignement prothétique après traitement.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [
+            {
+              "src": "/images/implantologie_1.webp",
+              "alt": "Avant et après réhabilitation implantaire du sourire",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            },
+            {
+              "src": "/images/implantologie_2.webp",
+              "alt": "Résultat de traitement implantaire avec intégration esthétique",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            }
+          ],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-5",
+          "type": "cards",
+          "eyebrow": "",
+          "title": "",
+          "body": "",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [
+            {
+              "title": "Un suivi rigoureux",
+              "body": "La cicatrisation et l'intégration de l'implant sont suivies à chaque rendez-vous, pour s'assurer de la bonne évolution du traitement."
+            },
+            {
+              "title": "Un résultat durable",
+              "body": "Bien entretenu, un implant dentaire peut accompagner un patient de nombreuses années, avec un aspect proche d'une dent naturelle."
+            }
+          ],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-6",
+          "type": "text",
+          "eyebrow": "",
+          "title": "Une question sur l'implantologie ?",
+          "body": "",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [
+            {
+              "label": "Échanger avec le cabinet",
+              "href": "/contact"
+            }
+          ],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        }
+      ]
+    },
+    {
+      "id": "specialites-esthetique-dentaire",
+      "path": "/specialites/esthetique-dentaire",
+      "title": "Esthétique dentaire",
+      "description": "Retrouver un sourire naturel et harmonieux, sans compromettre la santé des dents ni la fonction masticatoire.",
+      "ogImage": "/images/soins-esthetiques-dentaires.webp",
+      "noindex": false,
+      "blocks": [
+        {
+          "id": "initial-1",
+          "type": "text",
+          "eyebrow": "Spécialité",
+          "title": "Esthétique dentaire",
+          "body": "Retrouver un sourire naturel et harmonieux, sans compromettre la santé des dents ni la fonction masticatoire.",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-2",
+          "type": "split",
+          "eyebrow": "Notre approche",
+          "title": "Un sourire qui vous ressemble",
+          "body": "L'esthétique dentaire ne se limite pas à blanchir les dents : elle consiste à harmoniser la forme, la teinte et l'alignement du sourire, en tenant compte des proportions naturelles du visage. Chaque traitement est proposé après un échange sur vos attentes et un examen clinique complet.\n\nLe contenu détaillé est masqué.\n\n### Des restaurations esthétiques réalisées avec précision\n\n#### Facettes céramiques en une seule séance\n\nAprès préparation de la dent, une empreinte optique remplace l'empreinte traditionnelle. La facette est conçue numériquement puis fabriquée sur place, avant d'être collée directement, souvent en une seule séance.\n\n#### Couronnes esthétiques\n\nLe même principe s'applique à la réalisation de couronnes complètes, avec un rendu naturel proche de la dent d'origine, sans les délais habituellement nécessaires à un laboratoire externe.\n\n#### Remplacement d'anciennes restaurations\n\nLes anciens amalgames ou restaurations vieillissantes peuvent être remplacés par des inlays ou onlays en céramique, réalisés eux aussi en une seule séance grâce aux outils numériques du cabinet.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [
+            {
+              "src": "/images/soins-esthetiques-dentaires.webp",
+              "alt": "Soins esthétiques dentaires au cabinet",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            }
+          ],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-3",
+          "type": "cards",
+          "eyebrow": "",
+          "title": "",
+          "body": "",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [
+            {
+              "title": "Éclaircissement dentaire",
+              "body": "Une technique encadrée pour atténuer les taches et redonner de la luminosité au sourire, adaptée à la sensibilité de chaque patient."
+            },
+            {
+              "title": "Facettes céramiques",
+              "body": "De fines lamelles collées sur la face visible des dents pour corriger la forme, la teinte ou de petits défauts d'alignement."
+            },
+            {
+              "title": "Harmonisation du sourire",
+              "body": "Une approche globale qui tient compte du visage, des lèvres et de la fonction masticatoire, pas seulement de la couleur des dents."
+            }
+          ],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-4",
+          "type": "gallery",
+          "eyebrow": "Avant / après",
+          "title": "Exemples de résultats en esthétique dentaire",
+          "body": "Une sélection de cas traités au cabinet pour illustrer les possibilités d'harmonisation du sourire selon la situation clinique de chaque patient.\n\nAvant\n\nAprès\n\nAvant\n\nAprès\n\nAvant\n\nAprès",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [
+            {
+              "src": "/images/avant_1.jpg",
+              "alt": "Sourire avant traitement esthétique, cas 1",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            },
+            {
+              "src": "/images/apres_1.jpg",
+              "alt": "Sourire après traitement esthétique, cas 1",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            },
+            {
+              "src": "/images/avant_2.jpg",
+              "alt": "Sourire avant traitement esthétique, cas 2",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            },
+            {
+              "src": "/images/apres_2.jpg",
+              "alt": "Sourire après traitement esthétique, cas 2",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            },
+            {
+              "src": "/images/avant_3.png",
+              "alt": "Restauration dentaire avant traitement, cas 3",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            },
+            {
+              "src": "/images/apres_3.png",
+              "alt": "Restauration dentaire après traitement, cas 3",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            },
+            {
+              "src": "/images/avant-apres_1.jpg",
+              "alt": "Montage photo montrant un avant et un après traitement esthétique",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            },
+            {
+              "src": "/images/avant-apres_2.jpg",
+              "alt": "Montage photo comparatif avant et après restauration esthétique",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            }
+          ],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-5",
+          "type": "text",
+          "eyebrow": "",
+          "title": "Envie d'échanger sur votre sourire ?",
+          "body": "",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [
+            {
+              "label": "Prendre rendez-vous",
+              "href": "/contact"
+            }
+          ],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        }
+      ]
+    },
+    {
+      "id": "specialites-dentisterie-numerique",
+      "path": "/specialites/dentisterie-numerique",
+      "title": "Dentisterie numérique (CFAO)",
+      "description": "Le cabinet s'appuie sur des outils numériques récents pour concevoir et fabriquer certaines restaurations dentaires avec précision, directement sur place.",
+      "ogImage": "/images/numerique-scanner-intraoral.jpg",
+      "noindex": false,
+      "blocks": [
+        {
+          "id": "initial-1",
+          "type": "text",
+          "eyebrow": "Spécialité",
+          "title": "Dentisterie numérique (CFAO)",
+          "body": "Le cabinet s'appuie sur des outils numériques récents pour concevoir et fabriquer certaines restaurations dentaires avec précision, directement sur place.",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-2",
+          "type": "split",
+          "eyebrow": "Empreinte optique",
+          "title": "Adieu la pâte à empreinte",
+          "body": "Le scanner intra oral capture en quelques minutes un modèle numérique précis de la bouche, sans pâte ni porte-empreinte. Le confort est immédiat et le résultat peut être visualisé directement à l'écran avec vous.\n\nLe contenu détaillé est masqué.\n\n### Comment fonctionne la CFAO au cabinet\n\n#### L'empreinte optique\n\nUn scanner intra oral capture directement la bouche du patient, sans pâte ni porte empreinte. Le modèle numérique obtenu est visible à l'écran presque instantanément.\n\n#### La conception assistée par ordinateur\n\nÀ partir de cette empreinte, la restauration (couronne, facette, inlay ou onlay) est modélisée numériquement. Cette étape permet d'ajuster la forme et les proportions avant toute fabrication.\n\n#### La fabrication assistée par ordinateur\n\nUne fois le projet validé, les données sont envoyées vers les outils de fabrication du cabinet, qui produisent la restauration directement sur place, en réduisant les délais et le nombre de rendez-vous nécessaires.\n\n#### Les avantages de cette approche\n\nUne céramique biocompatible et sans métal, une précision renforcée par la numérisation, un confort accru pour le patient, et dans de nombreux cas, un traitement réalisable en une seule séance.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [
+            {
+              "src": "/images/numerique-scanner-intraoral.jpg",
+              "alt": "Scanner intra oral utilisé pour réaliser des empreintes numériques sans pâte",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            }
+          ],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-3",
+          "type": "split",
+          "eyebrow": "Conception assistée par ordinateur",
+          "title": "Un projet de sourire visualisé avant traitement",
+          "body": "À partir de l'empreinte numérique, la forme des futures restaurations est modélisée sur ordinateur. Cette étape permet d'anticiper le rendu final et d'ajuster le projet avec vous avant toute fabrication.",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [
+            {
+              "src": "/images/numerique-opera-system.jpg",
+              "alt": "Écran de conception numérique affichant une reconstruction 3D du sourire",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            }
+          ],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-4",
+          "type": "gallery",
+          "eyebrow": "Fabrication assistée par ordinateur",
+          "title": "Des restaurations imprimées ou usinées sur place",
+          "body": "Certaines restaurations sont fabriquées directement au cabinet grâce à des imprimantes 3D dédiées, ce qui réduit les délais et le nombre de rendez-vous nécessaires.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [
+            {
+              "src": "/images/cfao-imprimantes-3d-ensemble.jpg",
+              "alt": "Ensemble des imprimantes 3D du cabinet dédiées à la fabrication assistée par ordinateur",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            },
+            {
+              "src": "/images/cfao-imprimante-3d-detail.jpg",
+              "alt": "Détail d'une imprimante 3D utilisée pour la fabrication assistée par ordinateur",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            }
+          ],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-5",
+          "type": "image",
+          "eyebrow": "Le plateau numérique",
+          "title": "Un espace dédié aux outils numériques",
+          "body": "",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [
+            {
+              "src": "/images/numerique-salle-vue-ensemble.jpg",
+              "alt": "Vue d'ensemble de la salle équipée pour la dentisterie numérique du cabinet",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            }
+          ],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-6",
+          "type": "text",
+          "eyebrow": "",
+          "title": "Des questions sur nos outils numériques ?",
+          "body": "",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [
+            {
+              "label": "Contacter le cabinet",
+              "href": "/contact"
+            }
+          ],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        }
+      ]
+    },
+    {
+      "id": "galerie",
+      "path": "/galerie",
+      "title": "Galerie photo",
+      "description": "Quelques images pour découvrir l'ambiance et le soin apporté aux espaces du cabinet, avant même votre première visite.",
+      "ogImage": "/images/accueil-secretariat-02.jpg",
+      "noindex": false,
+      "blocks": [
+        {
+          "id": "initial-1",
+          "type": "text",
+          "eyebrow": "Galerie",
+          "title": "Un aperçu du cabinet",
+          "body": "Quelques images pour découvrir l'ambiance et le soin apporté aux espaces du cabinet, avant même votre première visite.",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 3,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-2",
+          "type": "gallery",
+          "eyebrow": "",
+          "title": "",
+          "body": "- L'accueil du cabinet\n\n- Détail d'une salle de soin\n\n- Un cadre soigné",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 3,
+          "images": [
+            {
+              "src": "/images/accueil-secretariat-02.jpg",
+              "alt": "Espace accueil et secrétariat du cabinet des Docteurs Cohen",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            },
+            {
+              "src": "/images/cabinet-detail-salle-02.jpg",
+              "alt": "Détail d'une salle de soin du cabinet des Docteurs Cohen",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            },
+            {
+              "src": "/images/deco-miroir-detail.jpg",
+              "alt": "Détail de décoration du cabinet, avec un miroir mettant en valeur l'espace",
+              "caption": "",
+              "fit": "cover",
+              "position": "center",
+              "ratio": "landscape"
+            }
+          ],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        }
+      ]
+    },
+    {
+      "id": "espace-patient",
+      "path": "/espace-patient",
+      "title": "Espace patient",
+      "description": "Retrouvez ici les informations pratiques utiles avant votre premier rendez-vous, ainsi que les réponses aux questions les plus fréquentes.",
+      "ogImage": "",
+      "noindex": false,
+      "blocks": [
+        {
+          "id": "initial-1",
+          "type": "text",
+          "eyebrow": "Espace patient",
+          "title": "Préparer sereinement votre venue",
+          "body": "Retrouvez ici les informations pratiques utiles avant votre premier rendez-vous, ainsi que les réponses aux questions les plus fréquentes.",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-2",
+          "type": "text",
+          "eyebrow": "",
+          "title": "À apporter le jour de votre venue",
+          "body": "- Votre carte Vitale (acceptée au cabinet)\n\n- Un moyen de paiement : carte bancaire, chèque ou espèces\n\n- Vos examens/radiographies dentaires récents, si vous en avez\n\n- Tout document utile à votre suivi de soins\n\n### Prise en charge et mutuelle\n\nD'après les informations Doctolib, le cabinet est conventionné, la carte Vitale est acceptée et le tiers payant Sécurité sociale est proposé. Le niveau de remboursement complémentaire dépend ensuite de votre contrat de mutuelle.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-3",
+          "type": "faq",
+          "eyebrow": "Questions fréquentes",
+          "title": "Vous avez une question ?",
+          "body": "",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [
+            {
+              "title": "Comment prendre rendez-vous ?",
+              "body": "Vous pouvez réserver un créneau en ligne via Doctolib ou contacter directement le secrétariat du cabinet par téléphone ou par e-mail."
+            },
+            {
+              "title": "Le cabinet accepte-t-il les urgences ?",
+              "body": "Contactez le cabinet dès l'apparition d'une douleur ou d'un traumatisme dentaire : un créneau est recherché dans les meilleurs délais selon les disponibilités."
+            },
+            {
+              "title": "Les soins sont-ils pris en charge par la mutuelle ?",
+              "body": "Le cabinet est conventionné, accepte la carte Vitale et pratique le tiers payant Sécurité sociale. Le remboursement complémentaire dépend de votre contrat de mutuelle et du type de soin."
+            },
+            {
+              "title": "Puis-je venir accompagné à mon rendez-vous ?",
+              "body": "Oui, notamment pour les enfants ou les personnes ayant besoin d'assistance. Merci de le signaler au secrétariat au moment de la prise de rendez-vous."
+            }
+          ],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-4",
+          "type": "text",
+          "eyebrow": "",
+          "title": "Une question qui n'a pas trouvé de réponse ici ?",
+          "body": "",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [
+            {
+              "label": "Contacter le cabinet",
+              "href": "/contact"
+            }
+          ],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "path": "/contact",
+      "title": "Contact",
+      "description": "Une question, une demande de rendez-vous ? Le secrétariat vous répond, ou réservez directement un créneau en ligne via Doctolib.",
+      "ogImage": "",
+      "noindex": false,
+      "blocks": [
+        {
+          "id": "initial-1",
+          "type": "text",
+          "eyebrow": "Contact",
+          "title": "Contactez le cabinet",
+          "body": "Une question, une demande de rendez-vous ? Le secrétariat vous répond, ou réservez directement un créneau en ligne via Doctolib.",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-2",
+          "type": "contact",
+          "eyebrow": "Coordonnées & accès",
+          "title": "Envoyer un message",
+          "body": "Pour toute urgence, privilégiez un appel téléphonique directement au cabinet.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        }
+      ]
+    },
+    {
+      "id": "mentions-legales",
+      "path": "/mentions-legales",
+      "title": "Mentions légales",
+      "description": "Informations relatives à l'éditeur, à l'hébergement et aux conditions d'utilisation du site.",
+      "ogImage": "",
+      "noindex": false,
+      "blocks": [
+        {
+          "id": "initial-1",
+          "type": "text",
+          "eyebrow": "Informations légales",
+          "title": "Mentions légales",
+          "body": "Informations relatives à l'éditeur, à l'hébergement et aux conditions d'utilisation du site.",
+          "visible": true,
+          "width": "standard",
+          "background": "surface",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-2",
+          "type": "text",
+          "eyebrow": "",
+          "title": "Éditeur du site",
+          "body": "Le présent site est édité par {{practiceName}}, situé au {{address}}.\n\nTéléphone : {{phone}}\n\nE-mail : {{email}}",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-3",
+          "type": "text",
+          "eyebrow": "",
+          "title": "Hébergement",
+          "body": "Le site est hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-4",
+          "type": "text",
+          "eyebrow": "",
+          "title": "Propriété intellectuelle",
+          "body": "L'ensemble des contenus présents sur ce site (textes, images, graphismes, logo, vidéos, icônes) est protégé par le droit de la propriété intellectuelle. Toute reproduction, représentation, modification, publication ou adaptation, totale ou partielle, est interdite sans autorisation écrite préalable.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-5",
+          "type": "text",
+          "eyebrow": "",
+          "title": "Données personnelles",
+          "body": "Les données transmises via le formulaire de contact sont utilisées uniquement pour traiter votre demande. Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification et de suppression de vos données, en adressant votre demande à : {{email}} ou docteurcohena@gmail.com.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-6",
+          "type": "text",
+          "eyebrow": "",
+          "title": "Cookies",
+          "body": "Le site peut utiliser des cookies techniques nécessaires à son bon fonctionnement. En cas d'ajout de cookies de mesure d'audience ou tiers, une information spécifique et, si nécessaire, un recueil du consentement seront mis en place.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-7",
+          "type": "text",
+          "eyebrow": "",
+          "title": "Responsabilité",
+          "body": "L'éditeur du site s'efforce de fournir des informations aussi précises que possible. Toutefois, il ne pourra être tenu responsable des omissions, inexactitudes ou carences dans la mise à jour, qu'elles soient de son fait ou du fait de tiers partenaires.",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        },
+        {
+          "id": "initial-8",
+          "type": "text",
+          "eyebrow": "",
+          "title": "Conception et réalisation",
+          "body": "Site réalisé par Karlsefni : [https://bafode-cisse.vercel.app/](https://bafode-cisse.vercel.app/)",
+          "visible": true,
+          "width": "standard",
+          "background": "default",
+          "align": "left",
+          "imageSide": "right",
+          "columns": 2,
+          "images": [],
+          "buttons": [],
+          "items": [],
+          "startsAt": "",
+          "endsAt": ""
+        }
+      ]
+    }
+  ]
+}

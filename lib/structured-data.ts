@@ -1,4 +1,4 @@
-import { siteConfig, team } from "@/lib/site-config";
+import { contactEmails, siteConfig, team } from "@/lib/site-config";
 
 /**
  * Données structurées schema.org (type Dentist + LocalBusiness) partagées
@@ -14,7 +14,7 @@ export function getDentistStructuredData() {
     description: siteConfig.description,
     url: siteConfig.url,
     telephone: siteConfig.phone,
-    email: siteConfig.email,
+    email: contactEmails,
     address: {
       "@type": "PostalAddress",
       streetAddress: siteConfig.address.streetAddress,

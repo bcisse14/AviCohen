@@ -9,7 +9,7 @@ import {
   IconPhone,
   IconPin,
 } from "@/components/icons";
-import { siteConfig, team } from "@/lib/site-config";
+import { contactEmails, siteConfig, team } from "@/lib/site-config";
 import { getDentistStructuredData } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
@@ -72,15 +72,17 @@ export default function ContactPage() {
                     {siteConfig.phone}
                   </a>
                 </li>
-                <li className="flex items-center gap-3">
-                  <IconMail className="h-6 w-6 shrink-0 text-accent" />
-                  <a
-                    href={`mailto:${siteConfig.email}`}
-                    className="text-ink no-underline hover:text-accent"
-                  >
-                    {siteConfig.email}
-                  </a>
-                </li>
+                {contactEmails.map((email) => (
+                  <li key={email} className="flex items-center gap-3">
+                    <IconMail className="h-6 w-6 shrink-0 text-accent" />
+                    <a
+                      href={`mailto:${email}`}
+                      className="text-ink no-underline hover:text-accent"
+                    >
+                      {email}
+                    </a>
+                  </li>
+                ))}
               </ul>
 
               <p className="eyebrow mt-10">Horaires</p>

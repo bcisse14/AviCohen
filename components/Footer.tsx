@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { navigation, siteConfig } from "@/lib/site-config";
+import { contactEmails, navigation, siteConfig } from "@/lib/site-config";
 import { IconClock, IconMail, IconPhone, IconPin } from "@/components/icons";
 
 export function Footer() {
@@ -48,12 +48,14 @@ export function Footer() {
                 {siteConfig.phone}
               </a>
             </li>
-            <li className="flex items-center gap-2">
-              <IconMail className="h-5 w-5 shrink-0 text-accent" />
-              <a href={`mailto:${siteConfig.email}`} className="no-underline hover:text-accent">
-                {siteConfig.email}
-              </a>
-            </li>
+            {contactEmails.map((email) => (
+              <li key={email} className="flex items-center gap-2">
+                <IconMail className="h-5 w-5 shrink-0 text-accent" />
+                <a href={`mailto:${email}`} className="no-underline hover:text-accent">
+                  {email}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 

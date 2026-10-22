@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
-import { navigation, siteConfig, team } from "@/lib/site-config";
+import type { Settings } from "@/lib/cms/schema";
 import { IconClose, IconMenu } from "@/components/icons";
 
-export function Header() {
+export function Header({ settings }: { settings: Settings }) {
+  const { navigation, team } = settings;
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const menuId = useId();
@@ -33,7 +34,7 @@ export function Header() {
           href="/"
           className="shrink-0 whitespace-nowrap font-serif text-lg font-medium text-ink no-underline"
         >
-          {siteConfig.name}
+          {settings.name}
         </Link>
 
         <nav aria-label="Navigation principale" className="hidden min-w-0 lg:block">
@@ -75,7 +76,7 @@ export function Header() {
               <p className="px-2 pb-2 text-sm text-muted">Avec quel praticien ?</p>
               <ul className="flex flex-col gap-2">
                 {team.map((member) => (
-                  <li key={member.slug}>
+                  <li key={member.id}>
                     <Link
                       href={member.doctolibUrl}
                       target="_blank"
